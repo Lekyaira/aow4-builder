@@ -1,6 +1,6 @@
 # DB
-/db/.envrc
-/db/.direnv
-/db/.dbdata
-/db/logfile
-/db/.s.*
+.envrc
+.direnv
+.dbdata
+logfile
+.s.*

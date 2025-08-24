@@ -1,1 +1,0 @@
-/nix/store/jgvr5576yv6vxaxn9ps09222ii889zhk-postgresql-17.5/bin/postgres "--unix_socket_directories=/home/ryan/projects/web/aow4-builder/db"
