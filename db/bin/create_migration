@@ -16,7 +16,7 @@ NAME="${2:-}"
 	exit 2
 }
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../migrations" && pwd)" || exit 1
+ROOT_DIR="$(cd "${PWD}/migrations" && pwd)" || exit 1
 SOURCE_DIR="$ROOT_DIR/$DB_NAME"
 
 mkdir -p "$SOURCE_DIR"

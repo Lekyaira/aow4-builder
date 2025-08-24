@@ -154,3 +154,5 @@
 2025-08-23 18:36:37.219 CDT [640627] LOG:  database system is ready to accept connections
 2025-08-23 18:41:37.304 CDT [640628] LOG:  checkpoint starting: time
 2025-08-23 18:41:37.369 CDT [640628] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.065 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/22A4C58, redo lsn=0/22A4C00
+2025-08-23 19:44:03.323 CDT [649348] FATAL:  database "aow" does not exist
+2025-08-23 19:48:24.555 CDT [650379] FATAL:  database "aow" does not exist
