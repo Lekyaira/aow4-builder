@@ -1,1 +1,0 @@
-ALTER TABLE tomes DROP COLUMN tier;

@@ -12,7 +12,7 @@ NAME="${2:-}"
 
 [[ -z "$DB_NAME" || -z "$NAME" ]] && {
 	cmd="$(basename -- "$0")"
-	warn "Usage: %s <database name> <migration name>" "$cmd" >&2
+	warn "Usage: %s <database name> <migration name>" "$cmd"
 	exit 2
 }
 

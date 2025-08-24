@@ -10,7 +10,7 @@ ACTION="${2:-run}" # run | revert | info
 
 [[ -z "$DB_NAME" ]] && {
 	cmd="$(basename -- "$0")"
-	warn "Usage: %s <database name> [run | revert | info]" "$cmd" >&2
+	warn "Usage: %s <database name> [run | revert | info]" "$cmd"
 	exit 2
 }
 

@@ -8,13 +8,13 @@ NC='\033[0m' # No Color
 warn() {
 	local fmt=$1
 	shift
-	printf "%b$fmt%b\n" "$YELLOW" "$@" "$NC"
+	printf "%b$fmt%b\n" "$YELLOW" "$@" "$NC" >&2
 }
 
 err() {
 	local fmt=$1
 	shift
-	printf "%b$fmt%b\n" "$RED" "$@" "$NC"
+	printf "%b$fmt%b\n" "$RED" "$@" "$NC" >&1
 }
 
 msg() {
