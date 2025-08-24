@@ -156,3 +156,49 @@
 2025-08-23 18:41:37.369 CDT [640628] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.065 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/22A4C58, redo lsn=0/22A4C00
 2025-08-23 19:44:03.323 CDT [649348] FATAL:  database "aow" does not exist
 2025-08-23 19:48:24.555 CDT [650379] FATAL:  database "aow" does not exist
+2025-08-23 20:18:40.143 CDT [651943] ERROR:  syntax error at or near ")" at character 81
+2025-08-23 20:18:40.143 CDT [651943] STATEMENT:  BEGIN;
+	
+	CREATE TABLE tomes (
+		id SERIAL,
+		name TEXT NOT NULL,
+		PRIMARY KEY(id),
+	);
+	
+	CREATE TABLE tome_aspects (
+		tome_id INT NOT NULL,
+		aspect ASPECTS NOT NULL,
+		PRIMARY KEY(tome_id, aspect)
+		FOREIGN KEY(tome_id) REFERENCES tomes(id) ON DELETE RESTRICT
+	);
+	
+	COMMIT;
+	
+2025-08-23 20:19:17.603 CDT [652115] ERROR:  syntax error at or near ")" at character 81
+2025-08-23 20:19:17.603 CDT [652115] STATEMENT:  BEGIN;
+	
+	CREATE TABLE tomes (
+		id SERIAL,
+		name TEXT NOT NULL,
+		PRIMARY KEY(id),
+	);
+	
+	CREATE TABLE tome_aspects (
+		tome_id INT NOT NULL,
+		aspect ASPECTS NOT NULL,
+		PRIMARY KEY(tome_id, aspect),
+		FOREIGN KEY(tome_id) REFERENCES tomes(id) ON DELETE RESTRICT
+	);
+	
+	COMMIT;
+	
+2025-08-23 20:19:17.604 CDT [652115] LOG:  could not receive data from client: Connection reset by peer
+2025-08-23 20:21:39.102 CDT [640628] LOG:  checkpoint starting: time
+2025-08-23 20:21:53.694 CDT [652319] WARNING:  there is already a transaction in progress
+2025-08-23 20:21:53.724 CDT [652319] WARNING:  there is no transaction in progress
+2025-08-23 20:23:14.005 CDT [640628] LOG:  checkpoint complete: wrote 944 buffers (5.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=94.820 s, sync=0.027 s, total=94.903 s; sync files=311, longest=0.003 s, average=0.001 s; distance=4291 kB, estimate=4291 kB; lsn=0/26FD920, redo lsn=0/26D5948
+2025-08-23 20:30:54.609 CDT [653544] WARNING:  there is already a transaction in progress
+2025-08-23 20:30:54.630 CDT [653544] WARNING:  there is no transaction in progress
+2025-08-23 20:31:13.224 CDT [653653] FATAL:  database "aof" does not exist
+2025-08-23 20:31:39.216 CDT [640628] LOG:  checkpoint starting: time
+2025-08-23 20:31:45.119 CDT [640628] LOG:  checkpoint complete: wrote 59 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.857 s, sync=0.006 s, total=5.903 s; sync files=51, longest=0.004 s, average=0.001 s; distance=236 kB, estimate=3885 kB; lsn=0/2710A80, redo lsn=0/2710A28

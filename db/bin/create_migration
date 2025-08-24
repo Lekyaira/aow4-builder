@@ -20,5 +20,5 @@ ROOT_DIR="$(cd "${PWD}/migrations" && pwd)" || exit 1
 SOURCE_DIR="$ROOT_DIR/$DB_NAME"
 
 mkdir -p "$SOURCE_DIR"
-msg "+ sqlx migrate add -r %s --source %s" "$NAME" "$SOURCE_DIR"
+msg "Creating migration %s on database %s" "$NAME" "$DB_NAME"
 sqlx migrate add -r "$NAME" --source "$SOURCE_DIR"

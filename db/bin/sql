@@ -11,5 +11,5 @@ DB_NAME="${1:-}"
 	warn "Usage: %s <database name> [arguments]" "$cmd" >&2
 	exit 2
 }
-msg "+ psql -h %s -d %s %s" "$PWD" "$DB_NAME" "${@:2}"
+msg "Starting SQL..."
 psql -h "$PWD" -d "$DB_NAME" "${@:2}"
