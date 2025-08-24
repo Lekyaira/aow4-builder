@@ -5,13 +5,6 @@
 /backend/.cargo
 /backend/.env
 
-# DB
-/db/.envrc
-/db/.direnv
-/db/.dbdata
-/db/logfile
-/db/.s.*
-
 # Frontend
 /frontend/.envrc
 /frontend/.direnv

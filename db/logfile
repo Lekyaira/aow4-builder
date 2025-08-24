@@ -1,0 +1,156 @@
+2025-08-23 14:37:00.884 CDT [631445] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-gnu, compiled by clang version 19.1.7, 64-bit
+2025-08-23 14:37:00.885 CDT [631445] LOG:  listening on IPv6 address "::1", port 5432
+2025-08-23 14:37:00.885 CDT [631445] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-08-23 14:37:00.887 CDT [631445] LOG:  listening on Unix socket "/nas/projects/web/aow4-builder/db/.s.PGSQL.5432"
+2025-08-23 14:37:00.892 CDT [631448] LOG:  database system was shut down at 2025-08-23 14:36:59 CDT
+2025-08-23 14:37:00.901 CDT [631445] LOG:  database system is ready to accept connections
+2025-08-23 14:37:01.959 CDT [631445] LOG:  received fast shutdown request
+2025-08-23 14:37:01.960 CDT [631445] LOG:  aborting any active transactions
+2025-08-23 14:37:01.961 CDT [631445] LOG:  background worker "logical replication launcher" (PID 631451) exited with exit code 1
+2025-08-23 14:37:01.961 CDT [631446] LOG:  shutting down
+2025-08-23 14:37:01.962 CDT [631446] LOG:  checkpoint starting: shutdown immediate
+2025-08-23 14:37:02.450 CDT [631446] LOG:  checkpoint complete: wrote 1844 buffers (11.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.385 s, sync=0.053 s, total=0.489 s; sync files=597, longest=0.002 s, average=0.001 s; distance=8511 kB, estimate=8511 kB; lsn=0/1D3CC88, redo lsn=0/1D3CC88
+2025-08-23 14:37:02.461 CDT [631445] LOG:  database system is shut down
+2025-08-23 14:38:38.633 CDT [632130] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-gnu, compiled by clang version 19.1.7, 64-bit
+2025-08-23 14:38:38.634 CDT [632130] LOG:  listening on IPv6 address "::1", port 5432
+2025-08-23 14:38:38.634 CDT [632130] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-08-23 14:38:38.637 CDT [632130] LOG:  listening on Unix socket "/nas/projects/web/aow4-builder/db/.s.PGSQL.5432"
+2025-08-23 14:38:38.651 CDT [632133] LOG:  database system was shut down at 2025-08-23 14:37:02 CDT
+2025-08-23 14:38:38.811 CDT [632130] LOG:  database system is ready to accept connections
+2025-08-23 14:38:39.311 CDT [632148] ERROR:  database "users" already exists
+2025-08-23 14:38:39.311 CDT [632148] STATEMENT:  CREATE DATABASE users;
+2025-08-23 14:38:39.314 CDT [632130] LOG:  received fast shutdown request
+2025-08-23 14:38:39.314 CDT [632130] LOG:  aborting any active transactions
+2025-08-23 14:38:39.317 CDT [632130] LOG:  background worker "logical replication launcher" (PID 632136) exited with exit code 1
+2025-08-23 14:38:39.317 CDT [632131] LOG:  shutting down
+2025-08-23 14:38:39.317 CDT [632131] LOG:  checkpoint starting: shutdown immediate
+2025-08-23 14:38:39.604 CDT [632131] LOG:  checkpoint complete: wrote 925 buffers (5.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.202 s, sync=0.030 s, total=0.288 s; sync files=301, longest=0.003 s, average=0.001 s; distance=4256 kB, estimate=4256 kB; lsn=0/2165038, redo lsn=0/2165038
+2025-08-23 14:38:39.613 CDT [632130] LOG:  database system is shut down
+2025-08-23 14:39:38.065 CDT [632345] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-gnu, compiled by clang version 19.1.7, 64-bit
+2025-08-23 14:39:38.066 CDT [632345] LOG:  listening on IPv6 address "::1", port 5432
+2025-08-23 14:39:38.066 CDT [632345] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-08-23 14:39:38.069 CDT [632345] LOG:  listening on Unix socket "/home/ryan/projects/web/aow4-builder/db/.s.PGSQL.5432"
+2025-08-23 14:39:38.080 CDT [632348] LOG:  database system was shut down at 2025-08-23 14:38:39 CDT
+2025-08-23 14:39:38.095 CDT [632345] LOG:  database system is ready to accept connections
+2025-08-23 14:44:38.180 CDT [632346] LOG:  checkpoint starting: time
+2025-08-23 14:44:44.656 CDT [632346] LOG:  checkpoint complete: wrote 67 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.438 s, sync=0.003 s, total=6.477 s; sync files=24, longest=0.002 s, average=0.001 s; distance=327 kB, estimate=327 kB; lsn=0/21B6F88, redo lsn=0/21B6EF8
+2025-08-23 14:46:25.514 CDT [632388] ERROR:  syntax error at or near "not" at character 33
+2025-08-23 14:46:25.514 CDT [632388] STATEMENT:  create table tome_aspects (
+	int not null tome_id,
+	aspect not null aspect,
+	primary key (tome_id, aspect));
+2025-08-23 14:48:31.520 CDT [632388] ERROR:  type "index" does not exist at character 25
+2025-08-23 14:48:31.520 CDT [632388] STATEMENT:  create table tomes (
+	id index,
+	name text not null);
+2025-08-23 14:49:38.752 CDT [632346] LOG:  checkpoint starting: time
+2025-08-23 14:49:41.818 CDT [632346] LOG:  checkpoint complete: wrote 31 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.034 s, sync=0.004 s, total=3.067 s; sync files=29, longest=0.002 s, average=0.001 s; distance=131 kB, estimate=308 kB; lsn=0/21D7D30, redo lsn=0/21D7CD8
+2025-08-23 14:50:57.012 CDT [632388] ERROR:  syntax error at or near "tabe" at character 8
+2025-08-23 14:50:57.012 CDT [632388] STATEMENT:  create tabe empire_tomes (
+	empire_id int not null,
+	tome_id int not null,
+	primary key(empire_id, tome_id));
+2025-08-23 14:54:38.918 CDT [632346] LOG:  checkpoint starting: time
+2025-08-23 14:54:43.796 CDT [632346] LOG:  checkpoint complete: wrote 49 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.841 s, sync=0.009 s, total=4.878 s; sync files=42, longest=0.003 s, average=0.001 s; distance=186 kB, estimate=295 kB; lsn=0/2206708, redo lsn=0/22066B0
+2025-08-23 14:58:41.768 CDT [632388] ERROR:  syntax error at or near "auto" at character 84
+2025-08-23 14:58:41.768 CDT [632388] STATEMENT:  create table lord_subtypes (
+	lord_type_id int not null,
+	name text not null,
+	id int auto increment,
+	primary key(lord_type_id, name));
+2025-08-23 14:58:47.732 CDT [632388] ERROR:  syntax error at or near "auto_increment" at character 84
+2025-08-23 14:58:47.732 CDT [632388] STATEMENT:  create table lord_subtypes (
+	lord_type_id int not null,
+	name text not null,
+	id int auto_increment,
+	primary key(lord_type_id, name));
+2025-08-23 14:59:29.349 CDT [632388] ERROR:  syntax error at or near "serial" at character 84
+2025-08-23 14:59:29.349 CDT [632388] STATEMENT:  create table lord_subtypes (
+	lord_type_id int not null,
+	name text not null,
+	id int serial,
+	primary key(lord_type_id, name));
+2025-08-23 14:59:38.832 CDT [632346] LOG:  checkpoint starting: time
+2025-08-23 14:59:42.939 CDT [632346] LOG:  checkpoint complete: wrote 41 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.046 s, sync=0.007 s, total=4.107 s; sync files=40, longest=0.002 s, average=0.001 s; distance=175 kB, estimate=283 kB; lsn=0/22326D8, redo lsn=0/2232680
+2025-08-23 15:03:55.863 CDT [632388] ERROR:  syntax error at or near "text" at character 42
+2025-08-23 15:03:55.863 CDT [632388] STATEMENT:  alter table lord_types alter column name text not null unique;
+2025-08-23 15:04:33.805 CDT [632388] ERROR:  syntax error at or near "modify" at character 24
+2025-08-23 15:04:33.805 CDT [632388] STATEMENT:  alter table lord_types modify column name text not null unique;
+2025-08-23 15:04:39.039 CDT [632346] LOG:  checkpoint starting: time
+2025-08-23 15:04:43.338 CDT [632346] LOG:  checkpoint complete: wrote 43 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.242 s, sync=0.006 s, total=4.300 s; sync files=36, longest=0.002 s, average=0.001 s; distance=169 kB, estimate=272 kB; lsn=0/225CDF0, redo lsn=0/225CD60
+2025-08-23 15:04:50.201 CDT [632388] ERROR:  syntax error at or near "." at character 47
+2025-08-23 15:04:50.201 CDT [632388] STATEMENT:  alter table lord_types alter column lord_types.name text not null unique;
+2025-08-23 15:05:06.781 CDT [632388] ERROR:  syntax error at or near "text" at character 42
+2025-08-23 15:05:06.781 CDT [632388] STATEMENT:  alter table lord_types alter column name text not null unique;
+2025-08-23 15:09:39.439 CDT [632346] LOG:  checkpoint starting: time
+2025-08-23 15:09:41.724 CDT [632346] LOG:  checkpoint complete: wrote 23 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.227 s, sync=0.004 s, total=2.286 s; sync files=22, longest=0.003 s, average=0.001 s; distance=100 kB, estimate=255 kB; lsn=0/2276018, redo lsn=0/2275FA8
+2025-08-23 15:15:23.265 CDT [632388] ERROR:  syntax error at or near "foreign" at character 41
+2025-08-23 15:15:23.265 CDT [632388] STATEMENT:  alter table tome_aspects add constraint foreign key (tome_id) references tomes(id) on delete restrict;
+2025-08-23 15:19:39.886 CDT [632346] LOG:  checkpoint starting: time
+2025-08-23 15:19:41.671 CDT [632346] LOG:  checkpoint complete: wrote 18 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.722 s, sync=0.004 s, total=1.785 s; sync files=15, longest=0.003 s, average=0.001 s; distance=48 kB, estimate=234 kB; lsn=0/22823F0, redo lsn=0/2282398
+2025-08-23 15:20:02.041 CDT [632388] ERROR:  there is no unique constraint matching given keys for referenced table "lord_subtypes"
+2025-08-23 15:20:02.041 CDT [632388] STATEMENT:  alter table lord_subtype_aspects add constraint fk_lord_subtype_aspects_lord_subtypes foreign key(lord_subtype_id) references lord_subtypes(id) on delete restrict on update cascade;
+2025-08-23 17:47:11.929 CDT [632345] LOG:  received fast shutdown request
+2025-08-23 17:47:11.929 CDT [632345] LOG:  aborting any active transactions
+2025-08-23 17:47:11.931 CDT [632345] LOG:  background worker "logical replication launcher" (PID 632351) exited with exit code 1
+2025-08-23 17:47:11.931 CDT [632346] LOG:  shutting down
+2025-08-23 17:47:11.932 CDT [632346] LOG:  checkpoint starting: shutdown immediate
+2025-08-23 17:47:12.001 CDT [632346] LOG:  checkpoint complete: wrote 22 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.003 s, total=0.071 s; sync files=13, longest=0.003 s, average=0.001 s; distance=117 kB, estimate=222 kB; lsn=0/229F880, redo lsn=0/229F880
+2025-08-23 17:47:12.010 CDT [632345] LOG:  database system is shut down
+2025-08-23 17:47:32.078 CDT [636076] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-gnu, compiled by clang version 19.1.7, 64-bit
+2025-08-23 17:47:32.078 CDT [636076] LOG:  listening on IPv6 address "::1", port 5432
+2025-08-23 17:47:32.078 CDT [636076] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-08-23 17:47:32.081 CDT [636076] LOG:  listening on Unix socket "/nas/projects/web/aow4-builder/db/.s.PGSQL.5432"
+2025-08-23 17:47:32.094 CDT [636079] LOG:  database system was shut down at 2025-08-23 17:47:11 CDT
+2025-08-23 17:47:32.106 CDT [636076] LOG:  database system is ready to accept connections
+2025-08-23 17:47:32.196 CDT [636088] ERROR:  database "aow" already exists
+2025-08-23 17:47:32.196 CDT [636088] STATEMENT:  CREATE DATABASE aow;
+2025-08-23 17:47:32.224 CDT [636094] ERROR:  database "users" already exists
+2025-08-23 17:47:32.224 CDT [636094] STATEMENT:  CREATE DATABASE users;
+2025-08-23 17:47:32.229 CDT [636076] LOG:  received fast shutdown request
+2025-08-23 17:47:32.230 CDT [636076] LOG:  aborting any active transactions
+2025-08-23 17:47:32.235 CDT [636076] LOG:  background worker "logical replication launcher" (PID 636082) exited with exit code 1
+2025-08-23 17:47:32.235 CDT [636077] LOG:  shutting down
+2025-08-23 17:47:32.236 CDT [636077] LOG:  checkpoint starting: shutdown immediate
+2025-08-23 17:47:32.247 CDT [636077] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.013 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/229F8F8, redo lsn=0/229F8F8
+2025-08-23 17:47:32.260 CDT [636076] LOG:  database system is shut down
+2025-08-23 18:31:08.141 CDT [638933] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-gnu, compiled by clang version 19.1.7, 64-bit
+2025-08-23 18:31:08.142 CDT [638933] LOG:  listening on IPv6 address "::1", port 5432
+2025-08-23 18:31:08.142 CDT [638933] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-08-23 18:31:08.145 CDT [638933] LOG:  listening on Unix socket "/home/ryan/projects/web/aow4-builder/db/.s.PGSQL.5432"
+2025-08-23 18:31:08.159 CDT [638936] LOG:  database system was shut down at 2025-08-23 17:47:32 CDT
+2025-08-23 18:31:08.175 CDT [638933] LOG:  database system is ready to accept connections
+2025-08-23 18:32:28.734 CDT [638934] LOG:  checkpoint starting: immediate force wait
+2025-08-23 18:32:28.792 CDT [638934] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.002 s, total=0.059 s; sync files=5, longest=0.001 s, average=0.001 s; distance=16 kB, estimate=16 kB; lsn=0/22A3CB0, redo lsn=0/22A3C58
+2025-08-23 18:32:34.565 CDT [638934] LOG:  checkpoint starting: immediate force wait
+2025-08-23 18:32:34.619 CDT [638934] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.001 s, total=0.055 s; sync files=2, longest=0.001 s, average=0.001 s; distance=1 kB, estimate=15 kB; lsn=0/22A4330, redo lsn=0/22A42D8
+2025-08-23 18:32:39.973 CDT [638934] LOG:  checkpoint starting: immediate force wait
+2025-08-23 18:32:40.040 CDT [638934] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.001 s, total=0.068 s; sync files=2, longest=0.001 s, average=0.001 s; distance=1 kB, estimate=13 kB; lsn=0/22A4960, redo lsn=0/22A4908
+2025-08-23 18:33:09.442 CDT [638933] LOG:  received fast shutdown request
+2025-08-23 18:33:09.442 CDT [638933] LOG:  aborting any active transactions
+2025-08-23 18:33:09.444 CDT [638933] LOG:  background worker "logical replication launcher" (PID 638939) exited with exit code 1
+2025-08-23 18:33:09.444 CDT [638934] LOG:  shutting down
+2025-08-23 18:33:09.445 CDT [638934] LOG:  checkpoint starting: shutdown immediate
+2025-08-23 18:33:09.496 CDT [638934] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.001 s, total=0.052 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=12 kB; lsn=0/22A4AA0, redo lsn=0/22A4AA0
+2025-08-23 18:33:09.508 CDT [638933] LOG:  database system is shut down
+2025-08-23 18:34:36.021 CDT [639813] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-gnu, compiled by clang version 19.1.7, 64-bit
+2025-08-23 18:34:36.022 CDT [639813] LOG:  listening on IPv6 address "::1", port 5432
+2025-08-23 18:34:36.022 CDT [639813] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-08-23 18:34:36.026 CDT [639813] LOG:  listening on Unix socket "/home/ryan/projects/web/aow4-builder/db/.s.PGSQL.5432"
+2025-08-23 18:34:36.034 CDT [639816] LOG:  database system was shut down at 2025-08-23 18:33:09 CDT
+2025-08-23 18:34:36.046 CDT [639813] LOG:  database system is ready to accept connections
+2025-08-23 18:35:00.438 CDT [639813] LOG:  received fast shutdown request
+2025-08-23 18:35:00.439 CDT [639813] LOG:  aborting any active transactions
+2025-08-23 18:35:00.441 CDT [639813] LOG:  background worker "logical replication launcher" (PID 639819) exited with exit code 1
+2025-08-23 18:35:00.441 CDT [639814] LOG:  shutting down
+2025-08-23 18:35:00.442 CDT [639814] LOG:  checkpoint starting: shutdown immediate
+2025-08-23 18:35:00.474 CDT [639814] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.001 s, total=0.033 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/22A4B50, redo lsn=0/22A4B50
+2025-08-23 18:35:00.485 CDT [639813] LOG:  database system is shut down
+2025-08-23 18:36:37.192 CDT [640627] LOG:  starting PostgreSQL 17.5 on x86_64-pc-linux-gnu, compiled by clang version 19.1.7, 64-bit
+2025-08-23 18:36:37.193 CDT [640627] LOG:  listening on IPv6 address "::1", port 5432
+2025-08-23 18:36:37.193 CDT [640627] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-08-23 18:36:37.197 CDT [640627] LOG:  listening on Unix socket "/home/ryan/projects/web/aow4-builder/db/.s.PGSQL.5432"
+2025-08-23 18:36:37.204 CDT [640630] LOG:  database system was shut down at 2025-08-23 18:35:00 CDT
+2025-08-23 18:36:37.219 CDT [640627] LOG:  database system is ready to accept connections
+2025-08-23 18:41:37.304 CDT [640628] LOG:  checkpoint starting: time
+2025-08-23 18:41:37.369 CDT [640628] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.001 s, total=0.065 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/22A4C58, redo lsn=0/22A4C00
