@@ -1,9 +1,90 @@
 BEGIN;
 
-CREATE TABLE species_traits (
+CREATE TABLE species_forms (
 	id SERIAL,
 	name TEXT NOT NULL,
 	PRIMARY KEY(id)
 );
+
+CREATE TABLE species_traits (
+	id SERIAL,
+	name TEXT NOT NULL,
+	cost INT NOT NULL,
+	PRIMARY KEY(id)
+);
+
+INSERT INTO species_forms (name) VALUES
+	('Dwarfkin'),
+	('Elfkin'),
+	('Feline'),
+	('Goblinoid'),
+	('Halfling'),
+	('Human'),
+	('Molekin'),
+	('Orcoid'),
+	('Ratkin'),
+	('Toadkin'),
+	('Lizardfolk'),
+	('Avian'),
+	('Goatkin'),
+	('Lupine'),
+	('Insectoid'),
+	('Syron'),
+	('Simian'),
+	('Ogrekin');
+
+INSERT INTO species_traits (name, cost) VALUES
+	('Adaptable', 1),
+	('Cheerful', 1),
+	('Cold Blooded', 1),
+	('Elusive', 1),
+	('Hardy', 1),
+	('Sharp Eyes', 1),
+	('Arcane Focus', 2),
+	('Bulwark', 2),
+	('Ceaseless Cacophony', 2),
+	('Empowered by Magic', 2),
+	('Fast Recuperation', 2),
+	('Ferocious', 2),
+	('Herbivore', 2),
+	('Inner Fire', 2),
+	('Inner Frost', 2),
+	('Inner Lightning', 2),
+	('Keen-Sighted', 2),
+	('Light Footed', 2),
+	('Poisonous', 2),
+	('Quick Reflexes', 2),
+	('Resilient', 2),
+	('Resistant', 2),
+	('Sneaky', 2),
+	('Strong', 2),
+	('Tenacious', 2),
+	('Tough', 2),
+	('Defensive Tactics', 2),
+	('Overwhelm Tactics', 2),
+	('Pack Tactics', 2),
+	('Athletics', 3),
+	('Hideous Stench', 3),
+	('Arctic Adaptation', 1),
+	('Desert Adaptation', 1),
+	('Desolate Adaptation', 1),
+	('Swamp Adaptation', 1),
+	('Underground Adaptation', 1),
+	('Mount Masters', 1),
+	('Blessed Dragon Mounts', 3),
+	('Celestial Griffon Mounts', 3),
+	('Chariot Mounts', 3),
+	('Death Beetle Mounts', 3),
+	('Dire Bear Mounts', 3),
+	('Dread Spider Mounts', 3),
+	('Eagle Mounts', 3),
+	('Elephant Mounts', 3),
+	('Graceful Judge Mounts', 3),
+	('Mammoth Mounts', 3),
+	('Nightmare Mounts', 3),
+	('Pegasus Mounts', 3),
+	('Swift Raptor Mounts', 3),
+	('Unicorn Mounts', 3),
+	('White Wolf Mounts', 3);
 
 COMMIT;
