@@ -206,4 +206,22 @@ AS $$
 	ORDER BY c.name;
 $$;
 
+CREATE FUNCTION culture_traits_with_excludes()
+RETURNS TABLE(id INT, name TEXT, aspect aspects, traits_excluded INT[])
+LANGUAGE sql 
+AS $$
+	SELECT
+		t.id,
+		t.name,
+		t.aspect,
+		COALESCE(
+			array_agg(e.trait_excluded),
+			'{}'
+		)::INT[] AS INT 
+	FROM culture_traits t
+	LEFT JOIN culture_trait_excludes e ON e.trait_that_excludes = t.id
+	GROUP BY t.id, t.name
+	ORDER BY t.name;
+$$;
+
 COMMIT;
