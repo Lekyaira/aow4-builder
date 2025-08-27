@@ -215,12 +215,12 @@ AS $$
 		t.name,
 		t.aspect,
 		COALESCE(
-			array_agg(e.trait_excluded),
+			array_agg(e.trait_excluded) FILTER (WHERE e.trait_excluded IS NOT NULL),
 			'{}'
-		)::INT[] AS INT 
+		)::INT[] AS traits_excluded
 	FROM culture_traits t
 	LEFT JOIN culture_trait_excludes e ON e.trait_that_excludes = t.id
-	GROUP BY t.id, t.name
+	GROUP BY t.id, t.name, t.aspect
 	ORDER BY t.name;
 $$;
 

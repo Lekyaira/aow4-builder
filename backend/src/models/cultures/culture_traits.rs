@@ -12,20 +12,16 @@ pub struct Culture_Trait {
     pub id: i32,
     pub name: String,
     pub aspect: Option<Aspect>,
+    pub traits_excluded: Vec<i32>,
 }
 
 #[openapi]
 #[get("/culture_traits")]
 pub async fn culture_traits(mut db: Connection<AowDB>) -> ApiResult<Vec<Culture_Trait>> {
-    let forms = sqlx::query_as::<sqlx::Postgres, Culture_Trait>(
-        r#"
-        SELECT id, name, aspect
-        FROM culture_traits
-        "#
-    )
-    .fetch_all(&mut **db)
-    .await
-    .map_err(ApiError::from)?;
+    let traits = sqlx::query_as::<sqlx::Postgres, Culture_Trait>("SELECT * FROM culture_traits_with_excludes()")
+        .fetch_all(&mut **db)
+        .await
+        .map_err(ApiError::from)?;
 
-    Ok(Json(forms))
+    Ok(Json(traits))
 }
