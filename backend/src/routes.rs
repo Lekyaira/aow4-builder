@@ -10,5 +10,7 @@ pub fn get_routes() -> Vec<rocket::Route> {
     openapi_get_routes![
         species_forms,
         species_traits,
+        cultures,
+        culture_traits,
     ]
 }

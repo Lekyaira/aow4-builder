@@ -1,1 +1,1 @@
-CREATE TYPE aspects AS ENUM ( 'Astral', 'Shadow', 'Chaos', 'Materium', 'Nature', 'Order' );
+CREATE TYPE aspects AS ENUM ( 'astral', 'shadow', 'chaos', 'materium', 'nature', 'order' );

@@ -46,12 +46,12 @@ ON CONFLICT (lord_type, name) DO NOTHING;
 INSERT INTO lord_subtype_aspects (lord_type, lord_subtype, aspect)
 SELECT s.lord_type, s.name, v.aspect::aspects
 FROM (VALUES
-	('Astral Dragon', 'Astral'),
-	('Chaos Dragon', 'Chaos'),
-	('Materium Dragon', 'Materium'),
-	('Nature Dragon', 'Nature'),
-	('Order Dragon', 'Order'),
-	('Shadow Dragon', 'Shadow')
+	('Astral Dragon', 'astral'),
+	('Chaos Dragon', 'chaos'),
+	('Materium Dragon', 'materium'),
+	('Nature Dragon', 'nature'),
+	('Order Dragon', 'order'),
+	('Shadow Dragon', 'shadow')
 ) AS v(lord_subtype, aspect)
 JOIN lord_subtypes s ON s.name = v.lord_subtype
 ON CONFLICT (lord_subtype, aspect) DO NOTHING;

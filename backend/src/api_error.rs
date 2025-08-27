@@ -76,7 +76,7 @@ impl From<sqlx::Error> for ApiError {
         // Tune these cases as you like:
         match e {
             sqlx::Error::RowNotFound => ApiError::not_found("Resource not found."),
-            _ => ApiError::internal("Database error."),
+            _ => ApiError::internal(format!("Database error: {:?}", e)),
         }
     }
 }
