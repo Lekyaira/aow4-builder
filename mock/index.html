@@ -113,18 +113,13 @@
         >
           <div class="flex flex-col sm:flex-row sm:items-end gap-3">
             <div class="flex-1">
-              <label
-                for="empire"
-                id="empire-name"
-                class="block text-sm font-medium text-ink-soft dark:text-slate-300"
-                >Empire Name</label
-              >
+              <label for="empire" id="empire-name" class="sr-only">Empire Name</label>
               <input
                 id="empire"
                 name="empire"
                 type="text"
                 inputmode="text"
-                placeholder="Empire of Dawnstar"
+                placeholder="Name your empire..."
                 class="mt-1 w-full bg-white dark:bg-slate-800 border border-parchment-edge/70 dark:border-slate-700 rounded-herald px-4 py-3 font-display text-2xl sm:text-3xl tracking-wide shadow-sm focus:outline-none focus:ring-2 focus:ring-aspect-order/70"
               />
             </div>
@@ -340,11 +335,7 @@
           <h2 id="species" class="font-display text-xl mb-4">Species</h2>
           <div class="space-y-4">
             <div>
-              <label
-                for="species-select"
-                class="block text-sm font-medium text-ink-soft dark:text-slate-300"
-                >Choose species</label
-              >
+              <label for="species-select" class="sr-only">Species</label>
               <select
                 id="species-select"
                 name="species"
@@ -435,11 +426,7 @@
           <h2 id="culture" class="font-display text-xl mb-4">Culture</h2>
           <div class="space-y-4">
             <div>
-              <label
-                for="culture-select"
-                class="block text-sm font-medium text-ink-soft dark:text-slate-300"
-                >Choose culture</label
-              >
+              <label for="culture-select" class="sr-only">Culture</label>
               <select
                 id="culture-select"
                 name="culture"
@@ -460,7 +447,6 @@
                 class="text-sm font-medium text-ink-soft dark:text-slate-300"
               >
                 Culture traits
-                <span class="text-xs ms-1">(choose up to 2)</span>
               </legend>
               <div
                 class="mt-2 flex flex-wrap gap-2"
@@ -520,11 +506,7 @@
           <h2 id="ruler" class="font-display text-xl mb-4">Ruler</h2>
           <div class="space-y-4">
             <div>
-              <label
-                for="ruler-select"
-                class="block text-sm font-medium text-ink-soft dark:text-slate-300"
-                >Ruler type</label
-              >
+              <label for="ruler-select" class="sr-only">Ruler Type</label>
               <select
                 id="ruler-select"
                 name="ruler"
@@ -545,9 +527,6 @@
         >
           <div class="flex items-center justify-between mb-2">
             <h2 id="tomes" class="font-display text-xl">Tomes</h2>
-            <p class="text-sm text-ink-soft dark:text-slate-300">
-              Select multiple
-            </p>
           </div>
           <div
             class="flex flex-wrap gap-2"
