@@ -18,7 +18,7 @@
             colors: {
               // Aspect palette
               aspect: {
-                astral: '#4F46E5',   // blue
+                astral: '#0090C0',   // deeper cyan
                 shadow: '#7C3AED',   // purple
                 chaos: '#DC2626',    // red
                 materium: '#EA580C', // orange
@@ -106,7 +106,80 @@
             <p class="text-sm text-ink-soft dark:text-slate-300">Totals from species, culture, ruler, and tomes</p>
           </div>
 
-          <div id="aspectsList" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" role="list" aria-label="Aspect totals"></div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" role="list" aria-label="Aspect totals">
+            <!-- Astral -->
+            <div role="listitem" class="relative isolate grid place-items-center text-center rounded-full aspect-square min-h-[100px] sm:min-h-[120px] lg:min-h-[130px] bg-white/75 dark:bg-slate-800/70 ring-2 shadow-card ring-aspect-astral/30">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ring-1 ring-black/5 shadow-sm text-base font-semibold bg-aspect-astral/15 text-aspect-astral">
+                <span class="grid place-items-center w-5 h-5" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em">
+                    <path fill="currentColor" fill-rule="evenodd" d="M13.5 8a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0M8 4a.75.75 0 0 0 0 1.5A2.5 2.5 0 0 1 10.5 8A.75.75 0 1 0 12 8a4 4 0 0 0-4-4" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="sr-only">Astral: </span>
+                <span>6</span>
+              </div>
+            </div>
+            <!-- Shadow -->
+            <div role="listitem" class="relative isolate grid place-items-center text-center rounded-full aspect-square min-h-[100px] sm:min-h-[120px] lg:min-h-[130px] bg-white/75 dark:bg-slate-800/70 ring-2 shadow-card ring-aspect-shadow/30">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ring-1 ring-black/5 shadow-sm text-base font-semibold bg-aspect-shadow/15 text-aspect-shadow">
+                <span class="grid place-items-center w-5 h-5" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em">
+                    <path fill="currentColor" fill-rule="evenodd" d="M13.5 8a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0M8 4a.75.75 0 0 0 0 1.5A2.5 2.5 0 0 1 10.5 8A.75.75 0 1 0 12 8a4 4 0 0 0-4-4" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="sr-only">Shadow: </span>
+                <span>3</span>
+              </div>
+            </div>
+            <!-- Chaos -->
+            <div role="listitem" class="relative isolate grid place-items-center text-center rounded-full aspect-square min-h-[100px] sm:min-h-[120px] lg:min-h-[130px] bg-white/75 dark:bg-slate-800/70 ring-2 shadow-card ring-aspect-chaos/30">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ring-1 ring-black/5 shadow-sm text-base font-semibold bg-aspect-chaos/15 text-aspect-chaos">
+                <span class="grid place-items-center w-5 h-5" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em">
+                    <path fill="currentColor" fill-rule="evenodd" d="M13.5 8a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0M8 4a.75.75 0 0 0 0 1.5A2.5 2.5 0 0 1 10.5 8A.75.75 0 1 0 12 8a4 4 0 0 0-4-4" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="sr-only">Chaos: </span>
+                <span>4</span>
+              </div>
+            </div>
+            <!-- Materium -->
+            <div role="listitem" class="relative isolate grid place-items-center text-center rounded-full aspect-square min-h-[100px] sm:min-h-[120px] lg:min-h-[130px] bg-white/75 dark:bg-slate-800/70 ring-2 shadow-card ring-aspect-materium/30">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ring-1 ring-black/5 shadow-sm text-base font-semibold bg-aspect-materium/15 text-aspect-materium">
+                <span class="grid place-items-center w-5 h-5" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em">
+                    <path fill="currentColor" fill-rule="evenodd" d="M13.5 8a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0M8 4a.75.75 0 0 0 0 1.5A2.5 2.5 0 0 1 10.5 8A.75.75 0 1 0 12 8a4 4 0 0 0-4-4" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="sr-only">Materium: </span>
+                <span>2</span>
+              </div>
+            </div>
+            <!-- Nature -->
+            <div role="listitem" class="relative isolate grid place-items-center text-center rounded-full aspect-square min-h-[100px] sm:min-h-[120px] lg:min-h-[130px] bg-white/75 dark:bg-slate-800/70 ring-2 shadow-card ring-aspect-nature/30">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ring-1 ring-black/5 shadow-sm text-base font-semibold bg-aspect-nature/15 text-aspect-nature">
+                <span class="grid place-items-center w-5 h-5" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em">
+                    <path fill="currentColor" fill-rule="evenodd" d="M13.5 8a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0M8 4a.75.75 0 0 0 0 1.5A2.5 2.5 0 0 1 10.5 8A.75.75 0 1 0 12 8a4 4 0 0 0-4-4" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="sr-only">Nature: </span>
+                <span>5</span>
+              </div>
+            </div>
+            <!-- Order -->
+            <div role="listitem" class="relative isolate grid place-items-center text-center rounded-full aspect-square min-h-[100px] sm:min-h-[120px] lg:min-h-[130px] bg-white/75 dark:bg-slate-800/70 ring-2 shadow-card ring-aspect-order/30">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ring-1 ring-black/5 shadow-sm text-base font-semibold bg-aspect-order/15 text-aspect-order">
+                <span class="grid place-items-center w-5 h-5" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em">
+                    <path fill="currentColor" fill-rule="evenodd" d="M13.5 8a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0M8 4a.75.75 0 0 0 0 1.5A2.5 2.5 0 0 1 10.5 8A.75.75 0 1 0 12 8a4 4 0 0 0-4-4" clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+                <span class="sr-only">Order: </span>
+                <span>1</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -236,6 +309,13 @@
             <!-- Shadow -->
             <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-aspect-shadow/40 text-aspect-shadow bg-aspect-shadow/10 text-sm cursor-pointer select-none hover:-translate-y-0.5 transition shadow-sm focus-within:ring-2 focus-within:ring-aspect-astral/60"><input type="checkbox" class="sr-only" />Tome of Souls</label>
             <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-aspect-shadow/40 text-aspect-shadow bg-aspect-shadow/10 text-sm cursor-pointer select-none hover:-translate-y-0.5 transition shadow-sm focus-within:ring-2 focus-within:ring-aspect-astral/60"><input type="checkbox" class="sr-only" />Tome of Subversion</label>
+            <!-- Dual Aspect: Astral + Shadow (gradient border + gradient text) -->
+            <label aria-label="Tome of Stars and Veils (Astral + Shadow)" class="relative inline-flex rounded-full p-[1px] bg-gradient-to-r from-aspect-astral/40 to-aspect-shadow/40 text-sm cursor-pointer select-none hover:-translate-y-0.5 transition shadow-sm focus-within:ring-2 focus-within:ring-aspect-shadow/60">
+              <input type="checkbox" class="sr-only" />
+              <span class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-gradient-to-r from-aspect-astral/10 to-aspect-shadow/10">
+                <span class="font-semibold bg-gradient-to-r from-aspect-astral to-aspect-shadow bg-clip-text text-transparent">Tome of Stars &amp; Veils</span>
+              </span>
+            </label>
             <!-- Chaos -->
             <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-aspect-chaos/40 text-aspect-chaos bg-aspect-chaos/10 text-sm cursor-pointer select-none hover:-translate-y-0.5 transition shadow-sm focus-within:ring-2 focus-within:ring-aspect-astral/60"><input type="checkbox" class="sr-only" />Tome of Pyromancy</label>
             <!-- Materium -->
@@ -265,21 +345,6 @@
       Mockup for AoW4 Empire Builder • Accessibility-friendly • Responsive
     </footer>
 
-    <!-- Templates -->
-    <template id="aspectItemTpl">
-      <div role="listitem" class="relative isolate grid place-items-center text-center rounded-full aspect-square min-h-[100px] sm:min-h-[120px] lg:min-h-[130px] bg-white/75 dark:bg-slate-800/70 ring-2 shadow-card">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full ring-1 ring-black/5 shadow-sm text-base font-semibold">
-          <span class="grid place-items-center w-5 h-5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em" aria-hidden="true">
-              <path fill="currentColor" fill-rule="evenodd" d="M13.5 8a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0M8 4a.75.75 0 0 0 0 1.5A2.5 2.5 0 0 1 10.5 8A.75.75 0 1 0 12 8a4 4 0 0 0-4-4" clip-rule="evenodd"></path>
-            </svg>
-          </span>
-          <span class="sr-only"></span>
-          <span class="count"></span>
-        </div>
-      </div>
-    </template>
-
     <script>
       // Simple theme toggle handler
       document.getElementById('themeToggle')?.addEventListener('click', () => {
@@ -287,34 +352,6 @@
         const isDark = root.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
-      // Render Aspects from template using utility classes only
-      (function renderAspects(){
-        const aspects = [
-          { key:'astral', name:'Astral', value: 6 },
-          { key:'shadow', name:'Shadow', value: 3 },
-          { key:'chaos', name:'Chaos', value: 4 },
-          { key:'materium', name:'Materium', value: 2 },
-          { key:'nature', name:'Nature', value: 5 },
-          { key:'order', name:'Order', value: 1 }
-        ];
-        const colors = (k)=>({
-          ring: `ring-aspect-${k}/30`,
-          text: `text-aspect-${k}`,
-          bg: `bg-aspect-${k}/15`
-        });
-        const list = document.getElementById('aspectsList');
-        const tpl = document.getElementById('aspectItemTpl');
-        aspects.forEach(a => {
-          const {ring, text, bg} = colors(a.key);
-          const node = tpl.content.firstElementChild.cloneNode(true);
-          node.classList.add(ring);
-          const badge = node.querySelector('div');
-          badge.classList.add(bg, text);
-          node.querySelector('.sr-only').textContent = `${a.name}: `;
-          node.querySelector('.count').textContent = String(a.value);
-          list.appendChild(node);
-        });
-      })();
     </script>
   </body>
   
