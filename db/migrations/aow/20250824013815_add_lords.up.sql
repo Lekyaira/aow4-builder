@@ -7,53 +7,61 @@ CREATE TABLE lord_types (
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE lord_subtypes (
+CREATE TABLE lord_type_aspects (
 	lord_type INT NOT NULL,
-	name TEXT NOT NULL,
-	PRIMARY KEY(lord_type, name),
-	FOREIGN KEY(lord_type) REFERENCES lord_types(id) ON DELETE RESTRICT
-);
-
-CREATE TABLE lord_subtype_aspects (
-	lord_type INT NOT NULL,
-	lord_subtype TEXT NOT NULL,
 	aspect aspects NOT NULL,
-	PRIMARY KEY(lord_subtype, aspect),
-	FOREIGN KEY(lord_type, lord_subtype) REFERENCES lord_subtypes(lord_type, name) ON DELETE RESTRICT ON UPDATE CASCADE
+	PRIMARY KEY(lord_type, aspect),
+	FOREIGN KEY(lord_type) REFERENCES lord_types(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- Insert data
 INSERT INTO lord_types (name) VALUES 
 ('Mortal Champion'),
 ('Wizard King'),
-('Dragon Lord'),
+('Astral Dragon Lord'),
+('Chaos Dragon Lord'),
+('Materium Dragon Lord'),
+('Nature Dragon Lord'),
+('Order Dragon Lord'),
+('Shadow Dragon Lord'),
 ('Eldritch Sovereign'),
 ('Giant King');
 
-INSERT INTO lord_subtypes (lord_type, name)
-SELECT t.id, v.name
+INSERT INTO lord_type_aspects (lord_type, aspect)
+SELECT s.id, v.aspect::aspects
 FROM (VALUES
-  ('Dragon Lord', 'Astral Dragon'),
-  ('Dragon Lord', 'Chaos Dragon'),
-  ('Dragon Lord', 'Materium Dragon'),
-  ('Dragon Lord', 'Nature Dragon'),
-  ('Dragon Lord', 'Order Dragon'),
-  ('Dragon Lord', 'Shadow Dragon')
-) AS v(lord_type, name)
-JOIN lord_types t ON t.name = v.lord_type
-ON CONFLICT (lord_type, name) DO NOTHING;
+	('Astral Dragon Lord', 'astral'),
+	('Chaos Dragon Lord', 'chaos'),
+	('Materium Dragon Lord', 'materium'),
+	('Nature Dragon Lord', 'nature'),
+	('Order Dragon Lord', 'order'),
+	('Shadow Dragon Lord', 'shadow')
+) AS v(lord_type, aspect)
+JOIN lord_types s ON s.name = v.lord_type
+ON CONFLICT (lord_type, aspect) DO NOTHING;
 
-INSERT INTO lord_subtype_aspects (lord_type, lord_subtype, aspect)
-SELECT s.lord_type, s.name, v.aspect::aspects
-FROM (VALUES
-	('Astral Dragon', 'astral'),
-	('Chaos Dragon', 'chaos'),
-	('Materium Dragon', 'materium'),
-	('Nature Dragon', 'nature'),
-	('Order Dragon', 'order'),
-	('Shadow Dragon', 'shadow')
-) AS v(lord_subtype, aspect)
-JOIN lord_subtypes s ON s.name = v.lord_subtype
-ON CONFLICT (lord_subtype, aspect) DO NOTHING;
+-- Functions
+CREATE FUNCTION lord_types_with_aspects()
+RETURNS TABLE(id INT, name TEXT, aspects aspects[])
+LANGUAGE sql 
+AS $$
+	SELECT
+		l.id,
+		l.name,
+		COALESCE(
+			array_agg(a.aspect ORDER BY a.aspect) FILTER (WHERE a.aspect IS NOT NULL),
+			'{}'
+		)::aspects[] AS aspects
+	FROM lord_types l
+	LEFT JOIN lord_type_aspects a ON a.lord_type = l.id
+	GROUP BY l.id, l.name
+	ORDER BY 
+		CASE
+			WHEN name ILIKE '%mortal%' OR name ILIKE '%wizard%' THEN 1
+			WHEN name ILIKE '%dragon lord%' THEN 2
+			ELSE 3
+		END,
+		name;
+$$;
 
 COMMIT;

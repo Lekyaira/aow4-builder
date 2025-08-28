@@ -9,9 +9,10 @@ CREATE TABLE tomes (
 );
 
 CREATE TABLE tome_aspects (
+	id SERIAL,
 	tome_id INT NOT NULL,
 	aspect aspects NOT NULL,
-	PRIMARY KEY(tome_id, aspect),
+	PRIMARY KEY(id),
 	FOREIGN KEY(tome_id) REFERENCES tomes(id) ON DELETE RESTRICT
 );
 
@@ -105,66 +106,123 @@ SELECT t.id, v.aspect::aspects
 FROM (VALUES
 -- Astral
 	('Evocation', 'astral'),
+	('Evocation', 'astral'),
+	('Warding', 'astral'),
 	('Warding', 'astral'),
 	('Scrying', 'astral'),
+	('Scrying', 'astral'),
+	('Summoning', 'astral'),
 	('Summoning', 'astral'),
 	('Amplification', 'astral'),
+	('Amplification', 'astral'),
+	('Teleportation', 'astral'),
 	('Teleportation', 'astral'),
 	('Astral Convergence', 'astral'),
+	('Astral Convergence', 'astral'),
 	('The Astral Mirror', 'astral'),
+	('The Astral Mirror', 'astral'),
+	('The Arch Mage', 'astral'),
 	('The Arch Mage', 'astral'),
 -- Chaos
 	('Pyromancy', 'chaos'),
+	('Pyromancy', 'chaos'),
+	('The Horde', 'chaos'),
 	('The Horde', 'chaos'),
 	('Mayhem', 'chaos'),
+	('Mayhem', 'chaos'),
+	('Revelry', 'chaos'),
 	('Revelry', 'chaos'),
 	('Devastation', 'chaos'),
+	('Devastation', 'chaos'),
+	('Pandemonium', 'chaos'),
 	('Pandemonium', 'chaos'),
 	('Chaos Channeling', 'chaos'),
+	('Chaos Channeling', 'chaos'),
 	('The Demon Gate', 'chaos'),
+	('The Demon Gate', 'chaos'),
+	('The Chaos Lord', 'chaos'),
 	('The Chaos Lord', 'chaos'),
 -- Materium 
 	('Enchantment', 'materium'),
+	('Enchantment', 'materium'),
+	('Rock', 'materium'),
 	('Rock', 'materium'),
 	('Artificing', 'materium'),
+	('Artificing', 'materium'),
+	('Winds', 'materium'),
 	('Winds', 'materium'),
 	('The Dungeon Depths', 'materium'),
+	('The Dungeon Depths', 'materium'),
+	('Terramancy', 'materium'),
 	('Terramancy', 'materium'),
 	('Transmutation', 'materium'),
+	('Transmutation', 'materium'),
+	('The Crucible', 'materium'),
 	('The Crucible', 'materium'),
 	('The Golden Realm', 'materium'),
+	('The Golden Realm', 'materium'),
+	('The Creator', 'materium'),
 	('The Creator', 'materium'),
 -- Nature 
 	('Beasts', 'nature'),
+	('Beasts', 'nature'),
+	('Roots', 'nature'),
 	('Roots', 'nature'),
 	('Fertility', 'nature'),
+	('Fertility', 'nature'),
+	('Glades', 'nature'),
 	('Glades', 'nature'),
 	('Cycles', 'nature'),
+	('Cycles', 'nature'),
+	('Vigor', 'nature'),
 	('Vigor', 'nature'),
 	('Nature''s Wrath', 'nature'),
+	('Nature''s Wrath', 'nature'),
 	('Paradise', 'nature'),
+	('Paradise', 'nature'),
+	('The Goddess of Nature', 'nature'),
 	('The Goddess of Nature', 'nature'),
 -- Order 
 	('Faith', 'order'),
+	('Faith', 'order'),
+	('Zeal', 'order'),
 	('Zeal', 'order'),
 	('The Beacon', 'order'),
+	('The Beacon', 'order'),
+	('The Inquisition', 'order'),
 	('The Inquisition', 'order'),
 	('Virtue', 'order'),
+	('Virtue', 'order'),
+	('Sanctuary', 'order'),
 	('Sanctuary', 'order'),
 	('Subjugation', 'order'),
+	('Subjugation', 'order'),
+	('Exaltation', 'order'),
 	('Exaltation', 'order'),
 	('Supremacy', 'order'),
+	('Supremacy', 'order'),
 	('Archon', 'order'),
+	('Archon', 'order'),
+	('The God Emperor', 'order'),
 	('The God Emperor', 'order'),
 -- Shadow 
 	('Necromancy', 'shadow'),
+	('Necromancy', 'shadow'),
+	('Cryomancy', 'shadow'),
 	('Cryomancy', 'shadow'),
 	('The Doomherald', 'shadow'),
+	('The Doomherald', 'shadow'),
+	('Souls', 'shadow'),
 	('Souls', 'shadow'),
 	('The Cold Dark', 'shadow'),
+	('The Cold Dark', 'shadow'),
+	('The Great Transformation', 'shadow'),
 	('The Great Transformation', 'shadow'),
 	('Oblivion', 'shadow'),
+	('Oblivion', 'shadow'),
 	('The Reaper', 'shadow'),
+	('The Reaper', 'shadow'),
+	('The Eternal Lord', 'shadow'),
 	('The Eternal Lord', 'shadow'),
 -- Hybrid
 	('Evolution', 'nature'),
@@ -204,15 +262,25 @@ FROM (VALUES
 	('The Revenant', 'shadow'),
 	('The Revenant', 'order')
 ) AS v(tome_name, aspect)
-JOIN tomes t ON t.name = v.tome_name
-ON CONFLICT (tome_id, aspect) DO NOTHING;
+JOIN tomes t ON t.name = v.tome_name;
 
 -- Functions on tomes
 CREATE FUNCTION tomes_with_aspects()
-RETURNS TABLE(id INT, name TEXT, tier INT, aspect aspects)
+RETURNS TABLE(id INT, name TEXT, tier INT, aspects aspects[])
 LANGUAGE sql 
 AS $$
-	SELECT tomes.id, tomes.name, tomes.tier, tome_aspects.aspect FROM tomes, tome_aspects WHERE tome_aspects.tome_id = tomes.id;
+	SELECT 
+		t.id, 
+		t.name, 
+		t.tier, 
+		COALESCE(
+			array_agg(a.aspect) FILTER (WHERE a.aspect IS NOT NULL),
+			'{}'
+		)::aspects[] AS aspects
+		FROM tomes t
+		JOIN tome_aspects a ON a.tome_id = t.id
+		GROUP BY t.id, t.name, t.tier
+		ORDER BY t.name;
 $$;
 
 CREATE FUNCTION tomes_by_aspect(aspect_search aspects)
@@ -220,6 +288,21 @@ RETURNS TABLE(id INT, name TEXT, tier INT)
 LANGUAGE sql 
 AS $$
 	SELECT tomes.id, tomes.name, tomes.tier FROM tomes, tome_aspects WHERE tome_aspects.tome_id = tomes.id AND tome_aspects.aspect = aspect_search;
+$$;
+
+CREATE FUNCTION tomes_by_tier_with_aspect(tier_search INT)
+RETURNS TABLE(id INT, name TEXT, aspects aspects[])
+LANGUAGE sql 
+AS $$
+	SELECT 
+		t.id, 
+		t.name, 
+		COALESCE(
+			array_agg(a.aspect) FILTER (WHERE a.aspect IS NOT NULL),
+			'{}'
+		)::aspects[] AS aspects 
+	FROM tomes t JOIN tome_aspects a ON t.id = a.tome_id AND t.tier = tier_search
+	GROUP BY t.id, t.name;
 $$;
 
 COMMIT;
