@@ -15,9 +15,9 @@ pub struct Ruler {
 }
 
 #[openapi]
-#[get("/ruler_types")]
+#[get("/rulers/types")]
 pub async fn ruler_types(mut db: Connection<AowDB>) -> ApiResult<Vec<Ruler>> {
-    let rulers = sqlx::query_as::<sqlx::Postgres, Ruler>("SELECT * FROM lord_types_with_aspects()")
+    let rulers = sqlx::query_as::<sqlx::Postgres, Ruler>("SELECT * FROM ruler_types()")
         .fetch_all(&mut **db)
         .await
         .map_err(ApiError::from)?;

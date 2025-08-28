@@ -16,9 +16,9 @@ pub struct Culture_Trait {
 }
 
 #[openapi]
-#[get("/culture_traits")]
+#[get("/cultures/traits")]
 pub async fn culture_traits(mut db: Connection<AowDB>) -> ApiResult<Vec<Culture_Trait>> {
-    let traits = sqlx::query_as::<sqlx::Postgres, Culture_Trait>("SELECT * FROM culture_traits_with_excludes()")
+    let traits = sqlx::query_as::<sqlx::Postgres, Culture_Trait>("SELECT * FROM culture_traits()")
         .fetch_all(&mut **db)
         .await
         .map_err(ApiError::from)?;

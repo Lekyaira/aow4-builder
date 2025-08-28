@@ -265,7 +265,7 @@ FROM (VALUES
 JOIN tomes t ON t.name = v.tome_name;
 
 -- Functions on tomes
-CREATE FUNCTION tomes_with_aspects()
+CREATE FUNCTION tomes()
 RETURNS TABLE(id INT, name TEXT, tier INT, aspects aspects[])
 LANGUAGE sql 
 AS $$
@@ -284,25 +284,50 @@ AS $$
 $$;
 
 CREATE FUNCTION tomes_by_aspect(aspect_search aspects)
-RETURNS TABLE(id INT, name TEXT, tier INT)
-LANGUAGE sql 
-AS $$
-	SELECT tomes.id, tomes.name, tomes.tier FROM tomes, tome_aspects WHERE tome_aspects.tome_id = tomes.id AND tome_aspects.aspect = aspect_search;
-$$;
-
-CREATE FUNCTION tomes_by_tier_with_aspect(tier_search INT)
-RETURNS TABLE(id INT, name TEXT, aspects aspects[])
+RETURNS TABLE(id INT, name TEXT, tier INT, aspects aspects[])
 LANGUAGE sql 
 AS $$
 	SELECT 
 		t.id, 
 		t.name, 
+		t.tier, 
 		COALESCE(
 			array_agg(a.aspect) FILTER (WHERE a.aspect IS NOT NULL),
 			'{}'
-		)::aspects[] AS aspects 
-	FROM tomes t JOIN tome_aspects a ON t.id = a.tome_id AND t.tier = tier_search
-	GROUP BY t.id, t.name;
+		)::aspects[] AS aspects
+		FROM tomes t
+		JOIN tome_aspects a ON a.tome_id = t.id
+		WHERE EXISTS (
+				SELECT 1
+				FROM tome_aspects ta
+				WHERE ta.tome_id = t.id
+					AND ta.aspect = aspect_search
+			)
+		GROUP BY t.id, t.name, t.tier
+		ORDER BY t.name;
 $$;
+
+CREATE FUNCTION tomes_by_tier(tier_search INT)
+RETURNS TABLE(id INT, name TEXT, tier INT, aspects aspects[])
+LANGUAGE sql 
+AS $$
+	SELECT 
+		t.id, 
+		t.name, 
+		t.tier, 
+		COALESCE(
+			array_agg(a.aspect) FILTER (WHERE a.aspect IS NOT NULL),
+			'{}'
+		)::aspects[] AS aspects
+		FROM tomes t
+		JOIN tome_aspects a ON a.tome_id = t.id
+		WHERE t.tier = tier_search 
+		GROUP BY t.id, t.name, t.tier
+		ORDER BY t.name;
+$$;
+
+-- Indices
+CREATE INDEX idx_tome_aspects_tome_aspect
+  ON tome_aspects (tome_id, aspect);
 
 COMMIT;

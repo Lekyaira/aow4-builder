@@ -14,7 +14,7 @@ pub struct Species_Trait {
 }
 
 #[openapi]
-#[get("/species_traits")]
+#[get("/species/traits")]
 pub async fn species_traits(mut db: Connection<AowDB>) -> ApiResult<Vec<Species_Trait>> {
     let forms = sqlx::query_as::<sqlx::Postgres, Species_Trait>(
         r#"

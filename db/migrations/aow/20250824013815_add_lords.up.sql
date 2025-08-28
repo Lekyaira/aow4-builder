@@ -1,21 +1,21 @@
 BEGIN;
 
 -- Create tables
-CREATE TABLE lord_types (
+CREATE TABLE ruler_types (
 	id SERIAL,
 	name TEXT NOT NULL,
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE lord_type_aspects (
-	lord_type INT NOT NULL,
+CREATE TABLE ruler_type_aspects (
+	ruler_type INT NOT NULL,
 	aspect aspects NOT NULL,
-	PRIMARY KEY(lord_type, aspect),
-	FOREIGN KEY(lord_type) REFERENCES lord_types(id) ON DELETE RESTRICT ON UPDATE CASCADE
+	PRIMARY KEY(ruler_type, aspect),
+	FOREIGN KEY(ruler_type) REFERENCES ruler_types(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- Insert data
-INSERT INTO lord_types (name) VALUES 
+INSERT INTO ruler_types (name) VALUES 
 ('Mortal Champion'),
 ('Wizard King'),
 ('Astral Dragon Lord'),
@@ -27,8 +27,8 @@ INSERT INTO lord_types (name) VALUES
 ('Eldritch Sovereign'),
 ('Giant King');
 
-INSERT INTO lord_type_aspects (lord_type, aspect)
-SELECT s.id, v.aspect::aspects
+INSERT INTO ruler_type_aspects (ruler_type, aspect)
+SELECT t.id, v.aspect::aspects
 FROM (VALUES
 	('Astral Dragon Lord', 'astral'),
 	('Chaos Dragon Lord', 'chaos'),
@@ -36,25 +36,25 @@ FROM (VALUES
 	('Nature Dragon Lord', 'nature'),
 	('Order Dragon Lord', 'order'),
 	('Shadow Dragon Lord', 'shadow')
-) AS v(lord_type, aspect)
-JOIN lord_types s ON s.name = v.lord_type
-ON CONFLICT (lord_type, aspect) DO NOTHING;
+) AS v(ruler_type, aspect)
+JOIN ruler_types t ON t.name = v.ruler_type
+ON CONFLICT (ruler_type, aspect) DO NOTHING;
 
 -- Functions
-CREATE FUNCTION lord_types_with_aspects()
+CREATE FUNCTION ruler_types()
 RETURNS TABLE(id INT, name TEXT, aspects aspects[])
 LANGUAGE sql 
 AS $$
 	SELECT
-		l.id,
-		l.name,
+		r.id,
+		r.name,
 		COALESCE(
 			array_agg(a.aspect ORDER BY a.aspect) FILTER (WHERE a.aspect IS NOT NULL),
 			'{}'
 		)::aspects[] AS aspects
-	FROM lord_types l
-	LEFT JOIN lord_type_aspects a ON a.lord_type = l.id
-	GROUP BY l.id, l.name
+	FROM ruler_types r
+	LEFT JOIN ruler_type_aspects a ON a.ruler_type = r.id
+	GROUP BY r.id, r.name
 	ORDER BY 
 		CASE
 			WHEN name ILIKE '%mortal%' OR name ILIKE '%wizard%' THEN 1

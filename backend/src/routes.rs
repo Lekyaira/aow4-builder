@@ -12,6 +12,9 @@ pub fn get_routes() -> Vec<rocket::Route> {
         species_traits,
         cultures,
         culture_traits,
-        ruler_types
+        ruler_types,
+        tomes,
+        tomes_by_aspect_path,
+        tomes_by_tier_path,
     ]
 }

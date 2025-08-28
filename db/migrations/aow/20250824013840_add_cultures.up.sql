@@ -189,7 +189,8 @@ JOIN culture_traits t ON t.name = v.excludes_name
 JOIN culture_traits e ON e.name = v.excluded_name
 ON CONFLICT (trait_that_excludes, trait_excluded) DO NOTHING;
 
-CREATE FUNCTION cultures_with_aspects()
+-- Functions
+CREATE FUNCTION cultures()
 RETURNS TABLE(id INT, name TEXT, aspects aspects[])
 LANGUAGE sql 
 AS $$
@@ -206,7 +207,7 @@ AS $$
 	ORDER BY c.name;
 $$;
 
-CREATE FUNCTION culture_traits_with_excludes()
+CREATE FUNCTION culture_traits()
 RETURNS TABLE(id INT, name TEXT, aspect aspects, traits_excluded INT[])
 LANGUAGE sql 
 AS $$

@@ -13,7 +13,7 @@ pub struct Species_Form {
 }
 
 #[openapi]
-#[get("/species_forms")]
+#[get("/species/forms")]
 pub async fn species_forms(mut db: Connection<AowDB>) -> ApiResult<Vec<Species_Form>> {
     let forms = sqlx::query_as::<sqlx::Postgres, Species_Form>(
         r#"
