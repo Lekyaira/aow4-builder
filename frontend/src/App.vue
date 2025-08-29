@@ -11,7 +11,7 @@ import FooterInfo from "@/components/FooterInfo.vue";
     Skip to content
   </a>
   <TitleBar />
-  <main>
+  <main id="main" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <Suspense>
       <RouterView />
       <template #fallback> Loading... </template>

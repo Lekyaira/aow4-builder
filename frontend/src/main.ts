@@ -6,6 +6,7 @@ import piniaPersist from "pinia-plugin-persistedstate";
 import { client } from "@/api/client.gen";
 import OpenApiPlugin from "@/lib/openapi";
 import { router } from "@/router";
+import { useEmpireStore } from "@/stores/empire";
 
 // Set up OpenAPI bindings
 client.setConfig({
@@ -17,6 +18,10 @@ client.setConfig({
 // Set up data store
 const pinia = createPinia();
 pinia.use(piniaPersist);
+
+// Initialize empire data
+const empireStore = useEmpireStore(pinia);
+empireStore.init().catch(console.error);
 
 // Mount application
 createApp(App).use(pinia).use(OpenApiPlugin).use(router).mount("#app");
