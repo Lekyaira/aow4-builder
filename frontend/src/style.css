@@ -1,5 +1,32 @@
 @import "tailwindcss";
+@import "@fontsource/inter";
+@import "@fontsource/cinzel";
 
+@theme {
+  /* Aspect colors */
+  --color-aspect-astral: #0090c0;
+  --color-aspect-shadow: #7c3aed;
+  --color-aspect-chaos: #dc2626;
+  --color-aspect-materium: #ea580c;
+  --color-aspect-nature: #16a34a;
+  --color-aspect-order: #eab308;
+  /* Page Colors */
+  --color-ink: #1f2937;
+  --color-ink-soft: #334255;
+  --color-parchment-light: #f8f5eb;
+  --color-parchment-tan: #ede6d6;
+  --color-parchment-edge: #d9d2c2;
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, ui-sans-serif;
+  --font-display: "Cinzel", serif;
+
+  /* Borders and shadows */
+  --shadow-card: 0 2px 6px rgba(15, 23, 42, 0.12);
+  --radius-herald: 12px;
+}
+
+/*
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -79,3 +106,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+*/

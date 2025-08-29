@@ -24,11 +24,45 @@ export type ApiErrorBody = {
     details?: unknown;
 };
 
+export type SpeciesTrait = {
+    id: number;
+    name: string;
+    cost: number;
+};
+
+export type Culture = {
+    id: number;
+    name: string;
+    aspects: Array<Aspect>;
+};
+
+export type Aspect = 'astral' | 'shadow' | 'chaos' | 'materium' | 'nature' | 'order';
+
+export type CultureTrait = {
+    id: number;
+    name: string;
+    aspect?: Aspect | null;
+    traits_excluded: Array<number>;
+};
+
+export type Ruler = {
+    id: number;
+    name: string;
+    aspects: Array<Aspect>;
+};
+
+export type Tome = {
+    id: number;
+    name: string;
+    tier: number;
+    aspects: Array<Aspect>;
+};
+
 export type SpeciesFormsData = {
     body?: never;
     path?: never;
     query?: never;
-    url: '/species_forms';
+    url: '/species/forms';
 };
 
 export type SpeciesFormsErrors = {
@@ -42,6 +76,143 @@ export type SpeciesFormsResponses = {
 };
 
 export type SpeciesFormsResponse = SpeciesFormsResponses[keyof SpeciesFormsResponses];
+
+export type SpeciesTraitsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/species/traits';
+};
+
+export type SpeciesTraitsErrors = {
+    default: ApiErrorBody;
+};
+
+export type SpeciesTraitsError = SpeciesTraitsErrors[keyof SpeciesTraitsErrors];
+
+export type SpeciesTraitsResponses = {
+    200: Array<SpeciesTrait>;
+};
+
+export type SpeciesTraitsResponse = SpeciesTraitsResponses[keyof SpeciesTraitsResponses];
+
+export type CulturesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/cultures';
+};
+
+export type CulturesErrors = {
+    default: ApiErrorBody;
+};
+
+export type CulturesError = CulturesErrors[keyof CulturesErrors];
+
+export type CulturesResponses = {
+    200: Array<Culture>;
+};
+
+export type CulturesResponse = CulturesResponses[keyof CulturesResponses];
+
+export type CultureTraitsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/cultures/traits';
+};
+
+export type CultureTraitsErrors = {
+    default: ApiErrorBody;
+};
+
+export type CultureTraitsError = CultureTraitsErrors[keyof CultureTraitsErrors];
+
+export type CultureTraitsResponses = {
+    200: Array<CultureTrait>;
+};
+
+export type CultureTraitsResponse = CultureTraitsResponses[keyof CultureTraitsResponses];
+
+export type RulerTypesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/rulers/types';
+};
+
+export type RulerTypesErrors = {
+    default: ApiErrorBody;
+};
+
+export type RulerTypesError = RulerTypesErrors[keyof RulerTypesErrors];
+
+export type RulerTypesResponses = {
+    200: Array<Ruler>;
+};
+
+export type RulerTypesResponse = RulerTypesResponses[keyof RulerTypesResponses];
+
+export type TomesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/tomes';
+};
+
+export type TomesErrors = {
+    default: ApiErrorBody;
+};
+
+export type TomesError = TomesErrors[keyof TomesErrors];
+
+export type TomesResponses = {
+    200: Array<Tome>;
+};
+
+export type TomesResponse = TomesResponses[keyof TomesResponses];
+
+export type TomesByAspectPathData = {
+    body?: never;
+    path: {
+        aspect: Aspect;
+    };
+    query?: never;
+    url: '/tomes/by-aspect/{aspect}';
+};
+
+export type TomesByAspectPathErrors = {
+    default: ApiErrorBody;
+};
+
+export type TomesByAspectPathError = TomesByAspectPathErrors[keyof TomesByAspectPathErrors];
+
+export type TomesByAspectPathResponses = {
+    200: Array<Tome>;
+};
+
+export type TomesByAspectPathResponse = TomesByAspectPathResponses[keyof TomesByAspectPathResponses];
+
+export type TomesByTierPathData = {
+    body?: never;
+    path: {
+        tier: number;
+    };
+    query?: never;
+    url: '/tomes/by-tier/{tier}';
+};
+
+export type TomesByTierPathErrors = {
+    default: ApiErrorBody;
+};
+
+export type TomesByTierPathError = TomesByTierPathErrors[keyof TomesByTierPathErrors];
+
+export type TomesByTierPathResponses = {
+    200: Array<Tome>;
+};
+
+export type TomesByTierPathResponse = TomesByTierPathResponses[keyof TomesByTierPathResponses];
 
 export type ClientOptions = {
     baseURL: 'http://localhost:8000' | (string & {});
