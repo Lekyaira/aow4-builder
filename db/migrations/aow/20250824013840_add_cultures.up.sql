@@ -89,7 +89,7 @@ FROM (VALUES
 	('Primal Tunneling Spider', 'nature'),
 	('Primal Tunneling Spider', 'nature'),
 	('Primal Sylvan Wolf', 'nature'),
-	('Primal Sylvan Wolf', 'nature'),
+	('Primal Sylvan Wolf', 'order'),
 	('Oathsworn Harmony', 'order'),
 	('Oathsworn Harmony', 'nature'),
 	('Oathsworn Righteousness', 'order'),

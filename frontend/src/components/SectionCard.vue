@@ -10,6 +10,8 @@ defineProps<{ ariaLabelledby?: string }>();
     <header v-if="$slots.header" class="mb-4">
       <slot name="header" />
     </header>
-    <slot />
+    <div class="space-y-4">
+      <slot />
+    </div>
   </section>
 </template>

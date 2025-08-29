@@ -6,11 +6,12 @@ import AspectIndicator from "@/components/AspectIndicator.vue";
 import SelectField from "@/components/SelectField.vue";
 import { useEmpireStore } from "@/stores/empire";
 import type { Culture } from "@/api/types.gen";
-import { cultures } from "@/api/sdk.gen";
+import { cultures, speciesForms } from "@/api/sdk.gen";
 import { toOptions, fromValue } from "@/lib/selectAdapter";
 
 const empireStore = useEmpireStore();
-const { data: culturesData, errorText } = await cultures();
+const { data: culturesData, culturesErrorText } = await cultures();
+const { data: speciesFormsData, speciesFormsErrorText } = await speciesForms();
 
 // Options for cultures select field
 const cultureOptions = computed(() =>
@@ -26,12 +27,27 @@ const culturesModel = computed<number | null>({
   set: (val) => {
     const selected = fromValue(culturesData, val, (f) => f.id);
     empireStore.culture = selected;
-    console.log("Empire Culture: ", empireStore.culture);
   },
 });
 
-const c = ref(empireStore.culture);
+// Options for species forms select field
+const speciesFormsOptions = computed(() =>
+  toOptions<SpeciesForm>(
+    speciesFormsData,
+    (f) => f.id,
+    (f) => f.name,
+  ),
+);
+// Wire species forms v-model via computed setter/getter
+const speciesFormsModel = computed<number | null>({
+  get: () => empireStore.speciesForm?.id ?? null,
+  set: (val) => {
+    const selected = fromValue(speciesFormsData, val, (f) => f.id);
+    empireStore.speciesForm = selected;
+  },
+});
 </script>
+
 <template>
   <!-- Empire Name -->
   <section aria-labelledby="empire-name" class="mb-6">
@@ -103,6 +119,28 @@ const c = ref(empireStore.culture);
       <template #header>
         <h2 class="font-display text-xl">Species</h2>
       </template>
+      <SelectField
+        id="species-forms"
+        label="Species Forms"
+        :options="speciesFormsOptions"
+        :modelValue="speciesFormsModel"
+        @update:modelValue="speciesFormsModel = $event"
+      />
+      <fieldset>
+        <legend class="text-sm font-medium text-ink-soft dark:text-slate-300">
+          Traits
+          <span class="text-xs ms-1"
+            >({{ empireStore.speciesTraitPoints }})</span
+          >
+        </legend>
+        <div
+          class="mt-2 flex flex-wrap gap-2"
+          role="group"
+          aria-label="Species traits"
+        >
+          <!-- Trait chips -->
+        </div>
+      </fieldset>
     </SectionCard>
     <SectionCard>
       <template #header>

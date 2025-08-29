@@ -1,10 +1,16 @@
 import { defineStore } from "pinia";
-import type { Aspect, Culture, SpeciesForm } from "@/api/types.gen";
+import type {
+  Aspect,
+  Culture,
+  SpeciesForm,
+  SpeciesTrait,
+} from "@/api/types.gen";
 import { cultures, speciesForms } from "@/api/sdk.gen";
 
 export interface EmpireState {
   name: string;
   speciesForm: SpeciesForm | null;
+  speciesTraits: SpeciesTrait[];
   culture: Culture | null;
   _initialized: boolean;
 }
@@ -13,6 +19,7 @@ export const useEmpireStore = defineStore("empire", {
   state: (): EmpireState => ({
     name: "",
     speciesForm: null,
+    speciesTraits: [],
     culture: null,
     _initialized: false,
   }),
@@ -48,6 +55,13 @@ export const useEmpireStore = defineStore("empire", {
       val += state.culture?.aspects.filter((a) => a === "order").length;
       return val;
     },
+    speciesTraitPoints: (state) => {
+      let val = 5;
+      for (const trait of state.speciesTraits) {
+        val -= trait.cost;
+      }
+      return val;
+    },
   },
 
   actions: {
@@ -70,6 +84,16 @@ export const useEmpireStore = defineStore("empire", {
         console.error("Empire initialization failed:", err);
         this._initialized = false;
       }
+    },
+    addSpeciesTrait(trait: SpeciesTrait): boolean {
+      if (this.speciesTraitPoints - trait.cost < 0) return false;
+      this.speciesTraits.push(trait);
+      return true;
+    },
+    removeSpeciesTrait(trait: SpeciesTrait) {
+      const index = this.speciesTraits.indexOf(trait);
+      if (index === -1) return;
+      this.speciesTraits.splice(index, 1);
     },
   },
 
