@@ -5,6 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Age of Wonders 4 Empire Builder</title>
+    <script>
+      // Initialize theme early to avoid flash and follow Tailwind v4 guidance
+      (() => {
+        const storageKey = "theme";
+        const root = document.documentElement;
+        const stored = localStorage.getItem(storageKey);
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initial =
+          stored === "light" || stored === "dark"
+            ? stored
+            : prefersDark
+              ? "dark"
+              : "light";
+        root.classList.toggle("dark", initial === "dark");
+        root.style.colorScheme = initial; // Help the UA render form controls appropriately
+      })();
+    </script>
   </head>
   <body
     class="h-full bg-parchment-light text-ink dark:bg-slate-900 dark:text-slate-100"

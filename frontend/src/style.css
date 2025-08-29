@@ -2,6 +2,9 @@
 @import "@fontsource/inter";
 @import "@fontsource/cinzel";
 
+/* Make `dark:` variant use a class/attribute instead of media query */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Aspect colors */
   --color-aspect-astral: #0090c0;

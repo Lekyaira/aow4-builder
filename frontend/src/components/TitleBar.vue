@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+function toggleTheme() {
+  const root = document.documentElement;
+  const isDark = root.classList.contains("dark");
+  const next = isDark ? "light" : "dark";
+  root.classList.toggle("dark", next === "dark");
+  root.style.colorScheme = next;
+  localStorage.setItem("theme", next);
+}
+</script>
 
 <template>
   <header
@@ -21,6 +30,7 @@
           type="button"
           class="inline-flex items-center gap-2 rounded-md border border-parchment-edge/70 dark:border-slate-700 px-3 py-1.5 text-sm shadow-sm hover:bg-white/60 dark:hover:bg-slate-800/60"
           aria-label="Toggle dark mode"
+          @click="toggleTheme"
         >
           <span class="block dark:hidden" aria-hidden="true">🌙</span>
           <span class="hidden dark:block" aria-hidden="true">☀️</span>
