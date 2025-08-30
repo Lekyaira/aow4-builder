@@ -89,11 +89,11 @@ export const useEmpireStore = defineStore("empire", {
       if (this.speciesTraitPoints - trait.cost < 0) return false;
       this.speciesTraits.push(trait);
       return true;
+      console.log(this.speciesTraits);
     },
     removeSpeciesTrait(trait: SpeciesTrait) {
-      const index = this.speciesTraits.indexOf(trait);
-      if (index === -1) return;
-      this.speciesTraits.splice(index, 1);
+      this.speciesTraits = this.speciesTraits.filter((t) => t.id !== trait.id);
+      console.log(this.speciesTraits);
     },
   },
 

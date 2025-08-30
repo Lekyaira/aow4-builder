@@ -4,14 +4,18 @@ import TextField from "@/components/TextField.vue";
 import SectionCard from "@/components/SectionCard.vue";
 import AspectIndicator from "@/components/AspectIndicator.vue";
 import SelectField from "@/components/SelectField.vue";
+import SelectorChip from "@/components/SelectorChip.vue";
 import { useEmpireStore } from "@/stores/empire";
-import type { Culture } from "@/api/types.gen";
-import { cultures, speciesForms } from "@/api/sdk.gen";
+import type { Culture, SpeciesForm, SpeciesTrait } from "@/api/types.gen";
+import { cultures, speciesForms, speciesTraits } from "@/api/sdk.gen";
 import { toOptions, fromValue } from "@/lib/selectAdapter";
+import { useChipSelector } from "@/lib/useChipSelector";
 
 const empireStore = useEmpireStore();
 const { data: culturesData, culturesErrorText } = await cultures();
 const { data: speciesFormsData, speciesFormsErrorText } = await speciesForms();
+const { data: speciesTraitsData, speciesTraitsErrorText } =
+  await speciesTraits();
 
 // Options for cultures select field
 const cultureOptions = computed(() =>
@@ -44,6 +48,18 @@ const speciesFormsModel = computed<number | null>({
   set: (val) => {
     const selected = fromValue(speciesFormsData, val, (f) => f.id);
     empireStore.speciesForm = selected;
+  },
+});
+// Wire species traits v-model via computed boolean
+const { modelFor: speciesTraitsModel } = useChipSelector<SpeciesTrait, number>({
+  items: () => speciesTraitsData,
+  getId: (t) => t.id,
+  isSelected: (id) => empireStore.speciesTraits.some((t) => t.id === id),
+  add: (t) => {
+    empireStore.addSpeciesTrait(t);
+  },
+  remove: (id) => {
+    empireStore.removeSpeciesTrait(id);
   },
 });
 </script>
@@ -139,6 +155,19 @@ const speciesFormsModel = computed<number | null>({
           aria-label="Species traits"
         >
           <!-- Trait chips -->
+          <SelectorChip
+            v-for="t in speciesTraitsData"
+            :key="t.id"
+            :modelValue="speciesTraitsModel(t).value"
+            @update:modelValue="(val) => (speciesTraitsModel(t).value = val)"
+            :badge="t.cost"
+            :disabled="
+              empireStore.speciesTraitPoints < t.cost &&
+              !speciesTraitsModel(t).value
+            "
+          >
+            {{ t.name }}
+          </SelectorChip>
         </div>
       </fieldset>
     </SectionCard>
