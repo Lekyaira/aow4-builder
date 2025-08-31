@@ -31,31 +31,37 @@ export const useEmpireStore = defineStore("empire", {
     astralValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "astral").length;
+      val += state.cultureTraits.filter((a) => a.aspect === "astral").length;
       return val;
     },
     shadowValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "shadow").length;
+      val += state.cultureTraits.filter((a) => a.aspect === "shadow").length;
       return val;
     },
     chaosValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "chaos").length;
+      val += state.cultureTraits.filter((a) => a.aspect === "chaos").length;
       return val;
     },
     materiumValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "materium").length;
+      val += state.cultureTraits.filter((a) => a.aspect === "materium").length;
       return val;
     },
     natureValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "nature").length;
+      val += state.cultureTraits.filter((a) => a.aspect === "nature").length;
       return val;
     },
     orderValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "order").length;
+      val += state.cultureTraits.filter((a) => a.aspect === "order").length;
       return val;
     },
     speciesTraitPoints: (state) => {
