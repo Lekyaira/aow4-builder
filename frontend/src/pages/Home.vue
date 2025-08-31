@@ -11,12 +11,14 @@ import type {
   CultureTrait,
   SpeciesForm,
   SpeciesTrait,
+  Ruler,
 } from "@/api/types.gen";
 import {
   cultures,
   cultureTraits,
   speciesForms,
   speciesTraits,
+  rulerTypes,
 } from "@/api/sdk.gen";
 import { toOptions, fromValue } from "@/lib/selectAdapter";
 import { useChipSelector } from "@/lib/useChipSelector";
@@ -30,6 +32,7 @@ const { data: speciesTraitsData, speciesTraitsErrorText } =
   await speciesTraits();
 const { data: cultureTraitsData, cultureTraitsErrorText } =
   await cultureTraits();
+const { data: rulerTypesData, rulerTypesErrorText } = await rulerTypes();
 
 // Options for cultures select field
 const cultureOptions = computed(() =>
@@ -62,6 +65,23 @@ const speciesFormsModel = computed<number | null>({
   set: (val) => {
     const selected = fromValue(speciesFormsData, val, (f) => f.id);
     empireStore.speciesForm = selected;
+  },
+});
+
+// Options for ruler types select field
+const rulerTypesOptions = computed(() =>
+  toOptions<Ruler>(
+    rulerTypesData,
+    (f) => f.id,
+    (f) => f.name,
+  ),
+);
+// Wire ruler types v-model via computed setter/getter
+const rulerTypesModel = computed<number | null>({
+  get: () => empireStore.rulerType?.id ?? null,
+  set: (val) => {
+    const selected = fromValue(rulerTypesData, val, (f) => f.id);
+    empireStore.rulerType = selected;
   },
 });
 </script>
@@ -233,6 +253,13 @@ const speciesFormsModel = computed<number | null>({
       <template #header>
         <h2 class="font-display text-xl">Ruler</h2>
       </template>
+      <SelectField
+        id="ruler-type"
+        label="Ruler Type"
+        :options="rulerTypesOptions"
+        :modelValue="rulerTypesModel"
+        @update:modelValue="rulerTypesModel = $event"
+      />
     </SectionCard>
     <!-- Tomes -->
     <SectionCard>

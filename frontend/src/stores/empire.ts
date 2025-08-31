@@ -5,8 +5,9 @@ import type {
   CultureTrait,
   SpeciesForm,
   SpeciesTrait,
+  Ruler,
 } from "@/api/types.gen";
-import { cultures, speciesForms } from "@/api/sdk.gen";
+import { cultures, speciesForms, rulerTypes } from "@/api/sdk.gen";
 
 export interface EmpireState {
   name: string;
@@ -14,6 +15,7 @@ export interface EmpireState {
   speciesTraits: SpeciesTrait[];
   culture: Culture | null;
   cultureTraits: CultureTrait[];
+  rulerType: Ruler | null;
   _initialized: boolean;
 }
 
@@ -24,6 +26,7 @@ export const useEmpireStore = defineStore("empire", {
     speciesTraits: [],
     culture: null,
     cultureTraits: [],
+    rulerType: null,
     _initialized: false,
   }),
 
@@ -32,36 +35,42 @@ export const useEmpireStore = defineStore("empire", {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "astral").length;
       val += state.cultureTraits.filter((a) => a.aspect === "astral").length;
+      val += state.rulerType?.aspects.filter((a) => a === "astral").length;
       return val;
     },
     shadowValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "shadow").length;
       val += state.cultureTraits.filter((a) => a.aspect === "shadow").length;
+      val += state.rulerType?.aspects.filter((a) => a === "shadow").length;
       return val;
     },
     chaosValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "chaos").length;
       val += state.cultureTraits.filter((a) => a.aspect === "chaos").length;
+      val += state.rulerType?.aspects.filter((a) => a === "chaos").length;
       return val;
     },
     materiumValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "materium").length;
       val += state.cultureTraits.filter((a) => a.aspect === "materium").length;
+      val += state.rulerType?.aspects.filter((a) => a === "materium").length;
       return val;
     },
     natureValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "nature").length;
       val += state.cultureTraits.filter((a) => a.aspect === "nature").length;
+      val += state.rulerType?.aspects.filter((a) => a === "nature").length;
       return val;
     },
     orderValue: (state) => {
       let val = 0;
       val += state.culture?.aspects.filter((a) => a === "order").length;
       val += state.cultureTraits.filter((a) => a.aspect === "order").length;
+      val += state.rulerType?.aspects.filter((a) => a === "order").length;
       return val;
     },
     speciesTraitPoints: (state) => {
@@ -81,15 +90,19 @@ export const useEmpireStore = defineStore("empire", {
       if (this._initialized) return;
 
       try {
-        const [speciesFormsData, culturesData] = await Promise.all([
-          !this.speciesForm ? speciesForms() : Promise.resolve(null),
-          !this.culture ? cultures() : Promise.resolve(null),
-        ]);
+        const [speciesFormsData, culturesData, rulerTypesData] =
+          await Promise.all([
+            !this.speciesForm ? speciesForms() : Promise.resolve(null),
+            !this.culture ? cultures() : Promise.resolve(null),
+            !this.rulerType ? rulerTypes() : Promise.resolve(null),
+          ]);
 
         if (!this.speciesForm && speciesFormsData?.data?.length)
           this.speciesForm = speciesFormsData.data[0] ?? null;
         if (!this.culture && culturesData?.data?.length)
           this.culture = culturesData.data[0] ?? null;
+        if (!this.rulerType && rulerTypesData?.data?.length)
+          this.rulerType = rulerTypesData.data[0] ?? null;
 
         this._initialized = true;
       } catch (err) {
