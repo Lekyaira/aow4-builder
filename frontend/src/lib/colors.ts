@@ -87,3 +87,36 @@ export function aspectText(aspect: Aspect) {
     }
   }
 }
+
+export function badgeAspect(aspect: Aspect | null) {
+  switch (aspect) {
+    case "astral": {
+      return "!bg-aspect-astral/15 !text-aspect-astral";
+      break;
+    }
+    case "shadow": {
+      return "!bg-aspect-shadow/15 !text-aspect-shadow";
+      break;
+    }
+    case "chaos": {
+      return "!bg-aspect-chaos/15 !text-aspect-chaos";
+      break;
+    }
+    case "materium": {
+      return "!bg-aspect-materium/15 !text-aspect-materium";
+      break;
+    }
+    case "nature": {
+      return "!bg-aspect-nature/15 !text-aspect-nature";
+      break;
+    }
+    case "order": {
+      return "!bg-aspect-order/15 !text-aspect-order";
+      break;
+    }
+    case null: {
+      return "";
+      break;
+    }
+  }
+}

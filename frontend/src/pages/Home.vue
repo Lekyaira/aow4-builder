@@ -6,16 +6,30 @@ import AspectIndicator from "@/components/AspectIndicator.vue";
 import SelectField from "@/components/SelectField.vue";
 import SelectorChip from "@/components/SelectorChip.vue";
 import { useEmpireStore } from "@/stores/empire";
-import type { Culture, SpeciesForm, SpeciesTrait } from "@/api/types.gen";
-import { cultures, speciesForms, speciesTraits } from "@/api/sdk.gen";
+import type {
+  Culture,
+  CultureTrait,
+  SpeciesForm,
+  SpeciesTrait,
+} from "@/api/types.gen";
+import {
+  cultures,
+  cultureTraits,
+  speciesForms,
+  speciesTraits,
+} from "@/api/sdk.gen";
 import { toOptions, fromValue } from "@/lib/selectAdapter";
 import { useChipSelector } from "@/lib/useChipSelector";
+import { badgeAspect } from "@/lib/colors";
+import { AspectIcon } from "@/icons";
 
 const empireStore = useEmpireStore();
 const { data: culturesData, culturesErrorText } = await cultures();
 const { data: speciesFormsData, speciesFormsErrorText } = await speciesForms();
 const { data: speciesTraitsData, speciesTraitsErrorText } =
   await speciesTraits();
+const { data: cultureTraitsData, cultureTraitsErrorText } =
+  await cultureTraits();
 
 // Options for cultures select field
 const cultureOptions = computed(() =>
@@ -48,18 +62,6 @@ const speciesFormsModel = computed<number | null>({
   set: (val) => {
     const selected = fromValue(speciesFormsData, val, (f) => f.id);
     empireStore.speciesForm = selected;
-  },
-});
-// Wire species traits v-model via computed boolean
-const { modelFor: speciesTraitsModel } = useChipSelector<SpeciesTrait, number>({
-  items: () => speciesTraitsData,
-  getId: (t) => t.id,
-  isSelected: (id) => empireStore.speciesTraits.some((t) => t.id === id),
-  add: (t) => {
-    empireStore.addSpeciesTrait(t);
-  },
-  remove: (id) => {
-    empireStore.removeSpeciesTrait(id);
   },
 });
 </script>
@@ -131,6 +133,7 @@ const { modelFor: speciesTraitsModel } = useChipSelector<SpeciesTrait, number>({
   </div>
   <!-- Two-column responsive form layout -->
   <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Species -->
     <SectionCard>
       <template #header>
         <h2 class="font-display text-xl">Species</h2>
@@ -158,19 +161,26 @@ const { modelFor: speciesTraitsModel } = useChipSelector<SpeciesTrait, number>({
           <SelectorChip
             v-for="t in speciesTraitsData"
             :key="t.id"
-            :modelValue="speciesTraitsModel(t).value"
-            @update:modelValue="(val) => (speciesTraitsModel(t).value = val)"
-            :badge="t.cost"
+            :value="empireStore.hasSpeciesTrait(t)"
+            @update:value="
+              empireStore.hasSpeciesTrait(t)
+                ? empireStore.removeSpeciesTrait(t)
+                : empireStore.addSpeciesTrait(t)
+            "
             :disabled="
               empireStore.speciesTraitPoints < t.cost &&
-              !speciesTraitsModel(t).value
+              !empireStore.hasSpeciesTrait(t)
             "
           >
+            <template #badge>
+              {{ t.cost }}
+            </template>
             {{ t.name }}
           </SelectorChip>
         </div>
       </fieldset>
     </SectionCard>
+    <!-- Culture -->
     <SectionCard>
       <template #header>
         <h2 class="font-display text-xl">Culture</h2>
@@ -182,12 +192,49 @@ const { modelFor: speciesTraitsModel } = useChipSelector<SpeciesTrait, number>({
         :modelValue="culturesModel"
         @update:modelValue="culturesModel = $event"
       />
+      <fieldset>
+        <legend class="text-sm font-medium text-ink-soft dark:text-slate-300">
+          Traits
+          <span class="text-xs ms-1"
+            >({{ 2 - empireStore.cultureTraitsCount }})</span
+          >
+        </legend>
+        <div
+          class="mt-2 flex flex-wrap gap-2"
+          role="group"
+          aria-label="Species traits"
+        >
+          <!-- Culture trait chips -->
+          <SelectorChip
+            v-for="t in cultureTraitsData"
+            :key="t.id"
+            :value="empireStore.hasCultureTrait(t)"
+            @update:value="
+              empireStore.hasCultureTrait(t)
+                ? empireStore.removeCultureTrait(t)
+                : empireStore.addCultureTrait(t)
+            "
+            :disabled="
+              empireStore.cultureTraitsCount >= 2 &&
+              !empireStore.hasCultureTrait(t)
+            "
+            :badge-class="badgeAspect(t.aspect)"
+          >
+            <template #badge>
+              <AspectIcon />
+            </template>
+            {{ t.name }}
+          </SelectorChip>
+        </div>
+      </fieldset>
     </SectionCard>
+    <!-- Ruler -->
     <SectionCard>
       <template #header>
         <h2 class="font-display text-xl">Ruler</h2>
       </template>
     </SectionCard>
+    <!-- Tomes -->
     <SectionCard>
       <template #header>
         <h2 class="font-display text-xl">Tomes</h2>

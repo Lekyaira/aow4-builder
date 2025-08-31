@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import type {
   Aspect,
   Culture,
+  CultureTrait,
   SpeciesForm,
   SpeciesTrait,
 } from "@/api/types.gen";
@@ -12,6 +13,7 @@ export interface EmpireState {
   speciesForm: SpeciesForm | null;
   speciesTraits: SpeciesTrait[];
   culture: Culture | null;
+  cultureTraits: CultureTrait[];
   _initialized: boolean;
 }
 
@@ -21,6 +23,7 @@ export const useEmpireStore = defineStore("empire", {
     speciesForm: null,
     speciesTraits: [],
     culture: null,
+    cultureTraits: [],
     _initialized: false,
   }),
 
@@ -62,6 +65,9 @@ export const useEmpireStore = defineStore("empire", {
       }
       return val;
     },
+    cultureTraitsCount: (state) => {
+      return state.cultureTraits.length;
+    },
   },
 
   actions: {
@@ -89,18 +95,30 @@ export const useEmpireStore = defineStore("empire", {
       if (this.speciesTraitPoints - trait.cost < 0) return false;
       this.speciesTraits.push(trait);
       return true;
-      console.log(this.speciesTraits);
     },
     removeSpeciesTrait(trait: SpeciesTrait) {
       this.speciesTraits = this.speciesTraits.filter((t) => t.id !== trait.id);
-      console.log(this.speciesTraits);
+    },
+    hasSpeciesTrait(trait: SpeciesTrait): boolean {
+      return this.speciesTraits.some((t) => t.id === trait.id);
+    },
+    addCultureTrait(trait: CultureTrait) {
+      if (this.cultureTraits.length >= 2) return false;
+      this.cultureTraits.push(trait);
+      return true;
+    },
+    removeCultureTrait(trait: CultureTrait) {
+      this.cultureTraits = this.cultureTraits.filter((t) => t.id !== trait.id);
+    },
+    hasCultureTrait(trait: CultureTrait): boolean {
+      return this.cultureTraits.some((t) => t.id === trait.id);
     },
   },
 
   // <-- Persistence config
   persist: {
     key: "com.aow4-builder-empire",
-    paths: ["name", "speciesForm", "culture"], // only these fields are saved
+    paths: ["name", "speciesForm", "speciesTraits", "culture", "cultureTraits"], // only these fields are saved
     storage: sessionStorage, // or localStorage / cookies
   },
 });
