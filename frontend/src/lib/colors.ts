@@ -59,6 +59,64 @@ export function aspectBg(aspect: Aspect) {
   }
 }
 
+export function aspectBgFrom(aspect: Aspect) {
+  switch (aspect) {
+    case "astral": {
+      return "from-aspect-astral/40 aria-pressed:from-aspect-astral";
+      break;
+    }
+    case "shadow": {
+      return "from-aspect-shadow/40 aria-pressed:from-aspect-shadow";
+      break;
+    }
+    case "chaos": {
+      return "from-aspect-chaos/40 aria-pressed:from-aspect-chaos";
+      break;
+    }
+    case "materium": {
+      return "from-aspect-materium/40 aria-pressed:from-aspect-materium";
+      break;
+    }
+    case "nature": {
+      return "from-aspect-nature/40 aria-pressed:from-aspect-nature";
+      break;
+    }
+    case "order": {
+      return "from-aspect-order/40 aria-pressed:from-aspect-order";
+      break;
+    }
+  }
+}
+
+export function aspectBgTo(aspect: Aspect) {
+  switch (aspect) {
+    case "astral": {
+      return "to-aspect-astral/40 aria-pressed:to-aspect-astral";
+      break;
+    }
+    case "shadow": {
+      return "to-aspect-shadow/40 aria-pressed:to-aspect-shadow";
+      break;
+    }
+    case "chaos": {
+      return "to-aspect-chaos/40 aria-pressed:to-aspect-chaos";
+      break;
+    }
+    case "materium": {
+      return "to-aspect-materium/40 aria-pressed:to-aspect-materium";
+      break;
+    }
+    case "nature": {
+      return "to-aspect-nature/40 aria-pressed:to-aspect-nature";
+      break;
+    }
+    case "order": {
+      return "to-aspect-order/40 aria-pressed:to-aspect-order";
+      break;
+    }
+  }
+}
+
 export function aspectText(aspect: Aspect) {
   switch (aspect) {
     case "astral": {
@@ -83,6 +141,64 @@ export function aspectText(aspect: Aspect) {
     }
     case "order": {
       return "text-aspect-order";
+      break;
+    }
+  }
+}
+
+export function aspectTextFrom(aspect: Aspect) {
+  switch (aspect) {
+    case "astral": {
+      return "from-aspect-astral";
+      break;
+    }
+    case "shadow": {
+      return "from-aspect-shadow";
+      break;
+    }
+    case "chaos": {
+      return "from-aspect-chaos";
+      break;
+    }
+    case "materium": {
+      return "from-aspect-materium";
+      break;
+    }
+    case "nature": {
+      return "from-aspect-nature";
+      break;
+    }
+    case "order": {
+      return "from-aspect-order";
+      break;
+    }
+  }
+}
+
+export function aspectTextTo(aspect: Aspect) {
+  switch (aspect) {
+    case "astral": {
+      return "to-aspect-astral";
+      break;
+    }
+    case "shadow": {
+      return "to-aspect-shadow";
+      break;
+    }
+    case "chaos": {
+      return "to-aspect-chaos";
+      break;
+    }
+    case "materium": {
+      return "to-aspect-materium";
+      break;
+    }
+    case "nature": {
+      return "to-aspect-nature";
+      break;
+    }
+    case "order": {
+      return "to-aspect-order";
       break;
     }
   }

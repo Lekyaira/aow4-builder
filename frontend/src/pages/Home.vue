@@ -5,6 +5,7 @@ import SectionCard from "@/components/SectionCard.vue";
 import AspectIndicator from "@/components/AspectIndicator.vue";
 import SelectField from "@/components/SelectField.vue";
 import SelectorChip from "@/components/SelectorChip.vue";
+import TomeChip from "@/components/TomeChip.vue";
 import { useEmpireStore } from "@/stores/empire";
 import type {
   Culture,
@@ -12,6 +13,7 @@ import type {
   SpeciesForm,
   SpeciesTrait,
   Ruler,
+  Tome,
 } from "@/api/types.gen";
 import {
   cultures,
@@ -19,6 +21,7 @@ import {
   speciesForms,
   speciesTraits,
   rulerTypes,
+  tomes,
 } from "@/api/sdk.gen";
 import { toOptions, fromValue } from "@/lib/selectAdapter";
 import { useChipSelector } from "@/lib/useChipSelector";
@@ -33,6 +36,7 @@ const { data: speciesTraitsData, speciesTraitsErrorText } =
 const { data: cultureTraitsData, cultureTraitsErrorText } =
   await cultureTraits();
 const { data: rulerTypesData, rulerTypesErrorText } = await rulerTypes();
+const { data: tomesData, tomesErrorText } = await tomes();
 
 // Options for cultures select field
 const cultureOptions = computed(() =>
@@ -266,6 +270,18 @@ const rulerTypesModel = computed<number | null>({
       <template #header>
         <h2 class="font-display text-xl">Tomes</h2>
       </template>
+      <TomeChip
+        v-for="t in tomesData"
+        :key="t.id"
+        :tome="t"
+        :value="empireStore.hasTome(t)"
+        @update:value="
+          empireStore.hasTome(t)
+            ? empireStore.removeTome(t)
+            : empireStore.addTome(t)
+        "
+        :disabled="!empireStore.isTomeEligible(t)"
+      />
     </SectionCard>
   </section>
 </template>
