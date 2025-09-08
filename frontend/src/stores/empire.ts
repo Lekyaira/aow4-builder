@@ -9,7 +9,12 @@ import type {
   Tome,
 } from "@/api/types.gen";
 import { cultures, speciesForms, rulerTypes } from "@/api/sdk.gen";
+import { encodeBuild, decodeBuild, type EmpireState } from "@/lib/buildCodec";
 
+// Version 1
+// Match /src/lib/buildCodec.ts `PayloadV*` to this version!
+// If the type changes here, increment version in both places!!
+export const BUILD_VERSION = 1;
 export interface EmpireState {
   name: string;
   speciesForm: SpeciesForm | null;
@@ -232,6 +237,30 @@ export const useEmpireStore = defineStore("empire", {
       const canAfford = this.canAffordTome(t);
       const meetsTier = this.tomes.length >= 2 * (t.tier - 1);
       return canAfford && meetsTier;
+    },
+
+    toShareUrl(): string {
+      const build = encodeBuild(this.$state);
+      const url = new URL(window.location.href);
+      url.searchParams.set("build", build);
+      return url.toString();
+    },
+    /** Try to read ?build=XYZ and patch the store */
+    applyFromUrl(): boolean {
+      const url = new URL(window.location.href);
+      const param = url.searchParams.get("build");
+      if (!param) return false;
+
+      const decoded = decodeBuild(param);
+      if (!decoded) return false;
+
+      this.$patch(decoded);
+
+      // Clean the URL after applying so it’s pretty
+      url.searchParams.delete("build");
+      window.history.replaceState({}, "", url.toString());
+
+      return true;
     },
   },
 

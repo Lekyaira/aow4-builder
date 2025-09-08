@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
+import ShareEmpireButton from "@/components/ShareEmpireButton.vue";
 
 const titleRef = ref<HTMLElement | null>(null);
 const compactTitle = ref(false);
@@ -96,6 +97,7 @@ function toggleTheme() {
         Empire Builder
       </h1>
       <div v-if="!compactTitle" class="ms-auto flex items-center gap-2">
+        <ShareEmpireButton />
         <button
           id="themeToggle"
           type="button"

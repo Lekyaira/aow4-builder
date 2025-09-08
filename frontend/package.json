@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.10.0",
     "lucide-vue-next": "^0.535.0",
+    "lz-string": "^1.5.0",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.4.1",
     "tailwindcss": "^4.1.11",

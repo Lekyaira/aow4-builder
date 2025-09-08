@@ -7,6 +7,7 @@ import { client } from "@/api/client.gen";
 import OpenApiPlugin from "@/lib/openapi";
 import { router } from "@/router";
 import { useEmpireStore } from "@/stores/empire";
+import { installBuildImport } from "@/plugins/buildImport";
 
 // Set up OpenAPI bindings
 client.setConfig({
@@ -18,6 +19,7 @@ client.setConfig({
 // Set up data store
 const pinia = createPinia();
 pinia.use(piniaPersist);
+installBuildImport(router); // Apply empire build strings from URL
 
 // Initialize empire data
 const empireStore = useEmpireStore(pinia);
